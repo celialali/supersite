@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2022 at 10:33 AM
+-- Generation Time: Apr 22, 2022 at 11:14 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.4
 
@@ -34,18 +34,22 @@ CREATE TABLE `choix` (
 --
 
 INSERT INTO `choix` (`id_choix`, `intitule`, `vie`, `id_sit_suivante`, `id_sit_precedente`) VALUES
-(1, 'Prendre mon vÃ©lo', 0, 2, 1),
+(1, 'Prendre mon vélo', 0, 2, 1),
 (2, 'Y aller en courant', 0, 2, 1),
 (3, 'Partir vers le grand arbre', -1, 3, 2),
 (4, 'Partir vers le petit ruisseau', -1, 4, 2),
-(5, 'Partir vers l\'entrÃ©e du parc', 1, 6, 2),
+(5, 'Partir vers l\'entrée du parc', 1, 6, 2),
 (6, 'Retourner vers le banc vert', 0, 5, 3),
 (7, 'Passer par le petit talus', 0, 5, 4),
-(8, 'Retourner Ã  la maison', 0, 7, 5),
+(8, 'Retourner à la maison', 0, 7, 5),
 (9, 'Chercher encore un peu dans le parc', 0, 2, 5),
 (10, 'Retourner vers le banc vert', 0, 5, 6),
 (11, 'Suivre la dame', 1, 9, 7),
-(12, 'Retourner jouer Ã  la GameBoy Ã  la maison', -1, 12, 7);
+(12, 'Retourner jouer à la GameBoy à la maison', -1, 12, 7),
+(13, 'Mon lacet est défait', -1, 10, 9),
+(14, 'Dire à Fabien de partir devant', 0, 10, 9),
+(15, 'Nous suivons la dame du regard', 1, 11, 9),
+(16, 'Nous retournons sur nos pas', 0, 9, 10);
 
 -- --------------------------------------------------------
 
@@ -66,7 +70,7 @@ CREATE TABLE `histoire` (
 --
 
 INSERT INTO `histoire` (`id_hist`, `titre`, `image`, `description`, `affichee`) VALUES
-(1, 'Monsieur Charles', 'monsieurcharles.png', 'Tous les lundis aprÃ¨s l\'Ã©cole, monsieur Charles nous raconte une histoire. Mais aujourd\'hui, j\'ai l\'impression que la situation est diffÃ©rente...', 1);
+(1, 'Monsieur Charles', 'monsieurcharles.png', 'Tous les lundis après l\'école, monsieur Charles nous raconte une histoire. Mais aujourd\'hui, j\'ai l\'impression que la situation est différente...', 1);
 
 -- --------------------------------------------------------
 
@@ -98,17 +102,17 @@ CREATE TABLE `situation` (
 --
 
 INSERT INTO `situation` (`id_sit`, `paragraphe`, `id_hist`) VALUES
-(1, 'Aujourdâ€™hui, comme tous les lundis, dÃ¨s la sortie de la classe, je cours vers le parc avec mes\r\ncopains pour y retrouver monsieur Charles. Jâ€™essaye dâ€™arriver le premier pour pouvoir choisir\r\nlâ€™histoire quâ€™il va nous conter. Moi, je choisis toujours des histoires de dÃ©tectives... Vite je\r\ndois me dÃ©pÃªcher...', 1),
-(2, 'Nous voilÃ  arrivÃ©s au parc. On repÃ¨re toujours monsieur Charles de loin grÃ¢ce Ã  son grand panier rouge. Mais ce soir, le banc vert sur lequel monsieur Charles sâ€™assoit est vide. Nous partons Ã  sa recherche dans le parc..\r\n', 1),
-(3, 'Nous avons beau chercher, mais nous ne le trouvons toujours pas. Nous dÃ©cidons de retourner vers le banc vert.', 1),
-(4, 'Il nâ€™y a personne du cÃ´tÃ© du petit ruisseau. Nous dÃ©cidons de retourner vers le banc vert. Pour aller plus vite nous dÃ©cidons de revenir par le petit talus. ', 1),
-(5, 'Nous nous asseyons sur le banc et attendons un peu. Mais personne ne vient. Pour la premiÃ¨re fois, nous nâ€™aurons pas dâ€™histoire... ', 1),
-(6, 'ArrivÃ©s Ã  lâ€™entrÃ©e du parc, nous voyons un petit monsieur avec un manteau gris. Câ€™est lui !!! Nous lâ€™appelons Â« Monsieur Charles !!! Â» Mais il ne se retourne pas : ce nâ€™Ã©tait pas lui... nous dÃ©cidons de retourner vers le banc vert. ', 1),
-(7, 'Nous nous dirigeons vers la sortie du parc. Tout Ã  coup Fabien crie : Â« Regardez, regardez, câ€™est le panier de monsieur Charles ! Â». Il montrait une dame qui portait le panier rouge de notre ami. Tout ceci est bien mystÃ©rieux. ', 1),
-(8, 'Nous rentrons tous Ã  la maison, on reviendra lundi prochain pour voir sâ€™il sera lÃ ...  \r\n', 1),
-(9, 'Nous suivons la dame. Lucie avait un peu peur, mais je lâ€™ai encouragÃ©e : nous devons savoir ce qui est arrivÃ© Ã  monsieur Charles. Nous courons jusquâ€™Ã  la grille.', 1),
+(1, 'Aujourd’hui, comme tous les lundis, dès la sortie de la classe, je cours vers le parc avec mes\r\ncopains pour y retrouver monsieur Charles. J’essaye d’arriver le premier pour pouvoir choisir\r\nl’histoire qu’il va nous conter. Moi, je choisis toujours des histoires de détectives... Vite je\r\ndois me dépêcher...', 1),
+(2, 'Nous voilà arrivés au parc. On repère toujours monsieur Charles de loin grâce à son grand panier rouge. Mais ce soir, le banc vert sur lequel monsieur Charles s’assoit est vide. Nous partons à sa recherche dans le parc..\r\n', 1),
+(3, 'Nous avons beau chercher, mais nous ne le trouvons toujours pas. Nous décidons de retourner vers le banc vert.', 1),
+(4, 'Il n’y a personne du côté du petit ruisseau. Nous décidons de retourner vers le banc vert. Pour aller plus vite nous décidons de revenir par le petit talus. ', 1),
+(5, 'Nous nous asseyons sur le banc et attendons un peu. Mais personne ne vient. Pour la première fois, nous n’aurons pas d’histoire... ', 1),
+(6, 'Arrivés à l’entrée du parc, nous voyons un petit monsieur avec un manteau gris. C’est lui !!! Nous l’appelons « Monsieur Charles !!! » Mais il ne se retourne pas : ce n’était pas lui... nous décidons de retourner vers le banc vert. ', 1),
+(7, 'Nous nous dirigeons vers la sortie du parc. Tout à coup Fabien crie : « Regardez, regardez, c’est le panier de monsieur Charles ! ». Il montrait une dame qui portait le panier rouge de notre ami. Tout ceci est bien mystérieux. ', 1),
+(8, 'Nous rentrons tous à la maison, on reviendra lundi prochain pour voir s’il sera là...  \r\n', 1),
+(9, 'Nous suivons la dame. Lucie avait un peu peur, mais je l’ai encouragée : nous devons savoir ce qui est arrivé à monsieur Charles. Nous courons jusqu’à la grille.', 1),
 (10, 'Nous avons perdu la trace de la dame. Nous retournons sur nos pas.\r\n', 1),
-(11, 'Nous voyons la dame entrer dans un immeuble. Nous la suivons et voyons au loin un Monsieur en rouge. Nous appelons Â« Monsieur Charles, monsieur Charles !!! Â». Monsieur Charles nous attend tranquillement sur le palier. Il nous dit bonjour et nous demande ce que nous faisons ici. Nous lui racontons alors notre histoire de dÃ©tectives. Mais voilÃ  que monsieur Charles se met Ã  rire : Â« Mais Rose est mon aide-mÃ©nagÃ¨re ! Quand je suis malade, je prÃªte mon panier pour quâ€™elle aille faire mes courses. Nous avons tous bien rigolÃ© et nous avons eu droit Ã  une trÃ¨s belle histoire comme tous les lundis soirs. ', 1),
+(11, 'Nous voyons la dame entrer dans un immeuble. Nous la suivons et voyons au loin un Monsieur en rouge. Nous appelons « Monsieur Charles, monsieur Charles !!! ». Monsieur Charles nous attend tranquillement sur le palier. Il nous dit bonjour et nous demande ce que nous faisons ici. Nous lui racontons alors notre histoire de détectives. Mais voilà que monsieur Charles se met à rire : « Mais Rose est mon aide-ménagère ! Quand je suis malade, je prête mon panier pour qu’elle aille faire mes courses. Nous avons tous bien rigolé et nous avons eu droit à une très belle histoire comme tous les lundis soirs. ', 1),
 (12, 'Gros LOOSER c\'est PERDU', 1);
 
 --
@@ -147,7 +151,7 @@ ALTER TABLE `situation`
 -- AUTO_INCREMENT for table `choix`
 --
 ALTER TABLE `choix`
-  MODIFY `id_choix` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_choix` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `histoire`
