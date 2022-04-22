@@ -1,5 +1,7 @@
 <!doctype html>
-<?php session_start(); ?>
+<?php session_start(); 
+
+$movies = getDb()->query('select * from movie order by mov_id desc');?>
 <html>
     <?php require "head.php";?>
     
