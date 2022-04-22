@@ -1,9 +1,10 @@
 <!doctype html>
 <?php session_start(); 
 
-$movies = getDb()->query('select * from movie order by mov_id desc');?>
+$histoires = getDb()->query('select * from superhistoire order by id_hist desc');?>
 <html>
-    <?php require "head.php";?>
+    <?php require "head.php";
+    require "connect.php"?>
     
     <body>
     <div class="container">
@@ -12,8 +13,8 @@ $movies = getDb()->query('select * from movie order by mov_id desc');?>
         <h2 class="text-center">SuperSite</h2>
         <?php foreach ($histoires as $histoire) { ?>
             <article>
-                <h3><a class="movieTitle" href="movie.php?id=<?= $movie['mov_id'] ?>"><?= $movie['mov_title'] ?></a></h3>
-                <p class="movieContent"><?= $movie['mov_description_short'] ?></p>
+                <h3><a class="histTitle" href="hist.php?id=<?= $movie['id_hist'] ?>"><?= $movie['titre'] ?></a></h3>
+                <p class="histContent"><?= $movie['description'] ?></p>
             </article>
         <?php } ?>
 
