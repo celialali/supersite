@@ -1,7 +1,4 @@
 <!doctype html>
-
-
-
 <html>
 <?php 
 require "connect.php";
@@ -9,7 +6,7 @@ if($BDD) {
     // On enregistre la requête SQL dans une variable
     $req = "SELECT * FROM histoire ORDER BY id_hist";
     $curseur = $BDD->query($req);
-    }?>
+}?>
     
     
     <?php require "head.php";?>
