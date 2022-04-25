@@ -33,6 +33,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="login.php">Se connecter</a></li>
+                            <li><a href="register.php">S'inscrire</a></li>
                         </ul>
                     </li>
                 <?php } ?>
