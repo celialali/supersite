@@ -38,10 +38,6 @@ if($BDD) {
                     <p class="histContent"><?= $histoire['description'] ?></p>
                 </td>
             </tr>
-        
-                
-                
-  
             </article>
      
         <?php } ?>

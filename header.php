@@ -10,11 +10,18 @@
             </button>
             <a class="navbar-brand" href="index.php"><span class="glyphicon glyphicon-book"></span> SuperSite</a>
         </div>
+        
         <div class="collapse navbar-collapse" id="navbar-collapse-target">
-        <?php if (isset($_SESSION['login'])) { ?>
-                <ul class="nav navbar-nav">
-                    <li><a href="ajout_hist.php">Ajouter une histoire</a></li>
-                </ul>
+        <?php if (isset($_SESSION['login']) && $_SESSION['admin']==true) { ?>
+            <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span> Gérer les histoires <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="login.php">Ajouter une histoire</a></li>
+                            <li><a href="register.php">Modifier les histoires</a></li>
+                        </ul>
+                    </li>
             <?php } ?>
             <ul class="nav navbar-nav navbar-right">
                 <?php if (isset($_SESSION['login'])) { ?>
