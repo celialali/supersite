@@ -3,11 +3,12 @@
 <?php 
 require "connect.php";
 if($BDD) {
-    // On enregistre la requête SQL dans une variable
-    $req = "SELECT * FROM histoire ORDER BY id_hist";
-    $curseur = $BDD->query($req);
+    // On sélectionne les histoire qui doivent être affichées
+    $req = "SELECT * FROM histoire WHERE affichee=1 ORDER BY id_hist";  
+    $rep = $BDD->prepare($req);
+    $rep->execute();
+    $histoires = $rep->fetchAll();
 }?>
-    
     
     <?php require "head.php";?>
     
@@ -19,23 +20,22 @@ if($BDD) {
         <h2 class="text-center">SuperSite</h2>
         <h3 class="text-center">Le site dont vous êtes le héros</h3>
         <table>
-        <?php foreach ($curseur as $histoire) { ?>
+        <?php foreach ($histoires as $histoire) { ?>
             <hr/>
             <article>
             <tr>
                 <td>
-                    <h3><a class="histTitle" href="hist.php?id=<?= $histoire['id_hist'] ?>"><?= $histoire['titre'] ?></a></h3>
-                </td>
-                
-                    
-            </tr>
-            <tr>  
-                <td>
                     <img class="img-responsive" src="img/<?= $histoire['image'] ?>" title="<?= $histoire['titre'] ?>" width ="200"/>
+
+                </td>
+                <td>
+                    <p> 
+                        <h3><a class="histTitle" href="hist.php?id_hist=<?= $histoire['id_hist'] ?>&id_sit=1"><?= $histoire['titre'] ?></a></h3>
+                        <p class="histContent"><?= $histoire['description'] ?></p>
+                    </p>
                 </td>
                   
                 <td>
-                    <p class="histContent"><?= $histoire['description'] ?></p>
                 </td>
             </tr>
             </article>
