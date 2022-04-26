@@ -1,6 +1,8 @@
 <!doctype html>
+
 <html>
-    <?php require "head.php";?>
+    <?php require "connect.php";
+    require "head.php";?>
     
     <body>
     <div class="container">
@@ -26,6 +28,31 @@
                 </div>
             </form>
         </div>
+        <?php 
+        if(!empty($_POST['login']) && !empty($_POST['password'])){
+            $login=$_POST['login'];
+            $password=$_POST['password'];
+            if($BDD){
+                $req = "SELECT * FROM profil WHERE login=:unLogin AND mdp=:unPassword";
+                $reponse = $BDD->prepare($req);
+                $reponse -> execute(array(
+                    "unLogin"=>$login,
+                    "unPassword"=>$password
+                ));
+            }
+            if ($reponse->rowCount()==0){
+                echo "Erreur ! Cet utilisateur n'existe pas";
+            }
+            else{
+                $_SESSION['login'] = $login;
+                echo "Bonjour ".$_login;
+                header("Location: index.php");
+            }
+
+        }
+
+
+    ?>
 
         <?php require_once "footer.php"; ?>
     </div>
