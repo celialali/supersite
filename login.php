@@ -45,7 +45,8 @@
             }
             else{
                 $_SESSION['login'] = $login;
-                echo "Bonjour ".$_login;
+                $utilisateur = $reponse->fetch();
+                $estAdmin = $utilisateur['admin'];
                 header("Location: index.php");
             }
 

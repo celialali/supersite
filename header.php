@@ -12,7 +12,8 @@
         </div>
         
         
-        <?php if (isset($_SESSION['login'])) { ?> <!-- J'ai pas trouvé comment vérifier si c'est un admin ou pas-->
+        <?php
+        if (isset($_SESSION['login'])) { ?> <!-- J'ai pas trouvé comment vérifier si c'est un admin ou pas-->
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
