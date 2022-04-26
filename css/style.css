@@ -3,11 +3,11 @@ body {
 }
 
 .well{
-    background-color: rgb(241, 239, 220);
+    background-color: rgb(230, 201, 191);
 }
 
 .footer {
-    border-top: 1px solid rgb(140, 186, 206);
+    border-top: 1px solid rgb(206, 150, 140);
     padding-top: 10px;
     margin-bottom: 10px;
     text-align: center;
