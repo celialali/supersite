@@ -30,19 +30,22 @@
     <div class="container">
         <?php require_once "header.php"; ?>
 
-        <p> 
-            <?php echo $situation['paragraphe'];?>
-        </p>
-
+        <div class="well paragraph">
+            <p> 
+                <?php echo $situation['paragraphe'];?>
+            </p>
+        </div>
     </div>
     <div> 
         <table>
             <tr>
                 <?php foreach ($ensemble_choix as $choix) { ?> 
-                <td>
-                    <p class="bouton_choix"> 
-                        <a href="hist.php?id_hist=<?= $id_hist ?>&id_sit=<?= $choix['id_sit_suivante']?>"> <?php echo $choix['intitule'] ?> </a>
-                    </p>
+                <td class="choix">
+                    <div class = "well well-sm">
+                        <p class="bouton_choix">
+                            <a href="hist.php?id_hist=<?= $id_hist ?>&id_sit=<?= $choix['id_sit_suivante']?>"> <?php echo $choix['intitule'] ?> </a>
+                        </p>
+                    </div>
                 </td>
                 <?php } ?>
             </tr>

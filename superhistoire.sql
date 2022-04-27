@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 26 avr. 2022 à 10:40
+-- Généré le : mer. 27 avr. 2022 à 10:59
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.5
 
@@ -87,7 +87,9 @@ CREATE TABLE `profil` (
 
 INSERT INTO `profil` (`id_profil`, `login`, `mdp`, `admin`) VALUES
 (1, 'correcteur_admin', 'mdp_correcteur_1234', 1),
-(2, 'correcteur', 'mdp_correcteur_1234', 0);
+(2, 'correcteur', 'mdp_correcteur_1234', 0),
+(3, 'cor', '1234', 0),
+(4, 'corr', '12345', 1);
 
 -- --------------------------------------------------------
 
@@ -167,7 +169,7 @@ ALTER TABLE `histoire`
 -- AUTO_INCREMENT pour la table `profil`
 --
 ALTER TABLE `profil`
-  MODIFY `id_profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `situation`

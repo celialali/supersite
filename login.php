@@ -9,7 +9,7 @@
         <?php require "header.php"; ?>
 
         <h2 class="text-center">Connexion</h2>
-        <div class="well">
+        <div class="well connect">
             <form class="form-signin form-horizontal" role="form" action="login.php" method="post">
                 <div class="form-group">
                     <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">

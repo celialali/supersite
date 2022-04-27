@@ -2,10 +2,6 @@ body {
     padding-top: 60px;
 }
 
-.well{
-    background-color: rgb(243, 230, 225);
-}
-
 .footer {
     border-top: 1px solid rgb(206, 150, 140);
     padding-top: 10px;
@@ -28,6 +24,25 @@ body {
     box-shadow: 1px 1px 10px rgb(39, 156, 185);
 }
 
+.paragraph{
+    background-color :rgba(255, 255, 255, 0.676);
+}
+
+.connect{
+    background-color: rgb(243, 230, 225);
+}
+
+.register{
+    background-color: rgb(225, 236, 243);
+}
+
+.choix{
+text-align : center;
+}
+
+table{
+    margin:auto;
+}
 
 
 

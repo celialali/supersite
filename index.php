@@ -28,14 +28,11 @@ if($BDD) {
                     <img class="img-responsive" src="img/<?= $histoire['image'] ?>" title="<?= $histoire['titre'] ?>" width ="200"/>
 
                 </td>
-                <td>
+                <td class="well well-sm">
                     <p> 
                         <h3><a class="histTitle" href="hist.php?id_hist=<?= $histoire['id_hist'] ?>&id_sit=1"><?= $histoire['titre'] ?></a></h3>
                         <p class="histContent"><?= $histoire['description'] ?></p>
                     </p>
-                </td>
-                  
-                <td>
                 </td>
             </tr>
             </article>
