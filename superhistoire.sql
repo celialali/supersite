@@ -2,23 +2,23 @@
 -- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : mer. 27 avr. 2022 à 10:59
--- Version du serveur : 10.4.24-MariaDB
--- Version de PHP : 8.1.5
+-- Host: 127.0.0.1
+-- Generation Time: Apr 27, 2022 at 02:12 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
--- Base de données : `superhistoire`
+-- Database: `superhistoire`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `choix`
+-- Table structure for table `choix`
 --
 
 CREATE TABLE `choix` (
@@ -30,7 +30,7 @@ CREATE TABLE `choix` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `choix`
+-- Dumping data for table `choix`
 --
 
 INSERT INTO `choix` (`id_choix`, `intitule`, `vie`, `id_sit_suivante`, `id_sit_precedente`) VALUES
@@ -45,12 +45,16 @@ INSERT INTO `choix` (`id_choix`, `intitule`, `vie`, `id_sit_suivante`, `id_sit_p
 (9, 'Chercher encore un peu dans le parc', 0, 2, 5),
 (10, 'Retourner vers le banc vert', 0, 5, 6),
 (11, 'Suivre la dame', 1, 9, 7),
-(12, 'Retourner jouer à la GameBoy à la maison', -1, 12, 7);
+(12, 'Retourner jouer à la GameBoy à la maison', -1, 12, 7),
+(13, 'Mon lacet est défait', -1, 10, 9),
+(14, 'Dire à Fabien de partir devant', 0, 10, 9),
+(15, 'Nous suivons la dame du regard', 1, 11, 9),
+(16, 'Nous retournons sur nos pas', 0, 9, 10);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `histoire`
+-- Table structure for table `histoire`
 --
 
 CREATE TABLE `histoire` (
@@ -58,20 +62,22 @@ CREATE TABLE `histoire` (
   `titre` varchar(50) NOT NULL,
   `image` varchar(20) NOT NULL,
   `description` varchar(700) NOT NULL,
-  `affichee` tinyint(1) NOT NULL DEFAULT 1
+  `affichee` tinyint(1) NOT NULL DEFAULT 1,
+  `id_sit_initiale` int(11) NOT NULL,
+  `id_sit_finale` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `histoire`
+-- Dumping data for table `histoire`
 --
 
-INSERT INTO `histoire` (`id_hist`, `titre`, `image`, `description`, `affichee`) VALUES
-(1, 'Monsieur Charles', 'monsieurcharles.png', 'Tous les lundis après l\'école, monsieur Charles nous raconte une histoire. Mais aujourd\'hui, j\'ai l\'impression que la situation est différente...', 1);
+INSERT INTO `histoire` (`id_hist`, `titre`, `image`, `description`, `affichee`, `id_sit_initiale`, `id_sit_finale`) VALUES
+(1, 'Monsieur Charles', 'monsieurcharles.png', 'Tous les lundis après l\'école, monsieur Charles nous raconte une histoire. Mais aujourd\'hui, j\'ai l\'impression que la situation est différente...', 1, 1, 11);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `profil`
+-- Table structure for table `profil`
 --
 
 CREATE TABLE `profil` (
@@ -82,19 +88,17 @@ CREATE TABLE `profil` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `profil`
+-- Dumping data for table `profil`
 --
 
 INSERT INTO `profil` (`id_profil`, `login`, `mdp`, `admin`) VALUES
-(1, 'correcteur_admin', 'mdp_correcteur_1234', 1),
-(2, 'correcteur', 'mdp_correcteur_1234', 0),
-(3, 'cor', '1234', 0),
-(4, 'corr', '12345', 1);
+(3, 'correcteur', 'mdp_correcteur_1234', 0),
+(4, 'correcteur_admin', 'mdp_correcteur_1234', 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `situation`
+-- Table structure for table `situation`
 --
 
 CREATE TABLE `situation` (
@@ -104,7 +108,7 @@ CREATE TABLE `situation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `situation`
+-- Dumping data for table `situation`
 --
 
 INSERT INTO `situation` (`id_sit`, `paragraphe`, `id_hist`) VALUES
@@ -122,57 +126,57 @@ INSERT INTO `situation` (`id_sit`, `paragraphe`, `id_hist`) VALUES
 (12, 'Gros LOOSER c\'est PERDU', 1);
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `choix`
+-- Indexes for table `choix`
 --
 ALTER TABLE `choix`
   ADD PRIMARY KEY (`id_choix`);
 
 --
--- Index pour la table `histoire`
+-- Indexes for table `histoire`
 --
 ALTER TABLE `histoire`
   ADD PRIMARY KEY (`id_hist`);
 
 --
--- Index pour la table `profil`
+-- Indexes for table `profil`
 --
 ALTER TABLE `profil`
   ADD PRIMARY KEY (`id_profil`);
 
 --
--- Index pour la table `situation`
+-- Indexes for table `situation`
 --
 ALTER TABLE `situation`
   ADD PRIMARY KEY (`id_sit`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `choix`
+-- AUTO_INCREMENT for table `choix`
 --
 ALTER TABLE `choix`
-  MODIFY `id_choix` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_choix` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT pour la table `histoire`
+-- AUTO_INCREMENT for table `histoire`
 --
 ALTER TABLE `histoire`
   MODIFY `id_hist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT pour la table `profil`
+-- AUTO_INCREMENT for table `profil`
 --
 ALTER TABLE `profil`
   MODIFY `id_profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `situation`
+-- AUTO_INCREMENT for table `situation`
 --
 ALTER TABLE `situation`
   MODIFY `id_sit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
