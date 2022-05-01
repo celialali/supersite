@@ -56,15 +56,17 @@
                 $login=$_POST['login'];
                 $motdepasse = $_POST['password'];
                 $admin=$_POST["admin"];
-                             
+
                 if($BDD){
                 $req = "INSERT INTO profil (login,mdp,admin) VALUES (:logi,:mdp,:admin)";
                 $prepare=$BDD ->prepare($req);
                 $prepare -> execute(array(":logi"=>$login, ":mdp"=>$motdepasse, ":admin"=>$admin));
-                }  
-            }
+                }
+                ?> <p class="text-center"> Bienvenue <?=$login?>, votre inscription a réussi. Vous pouvez désormais <a href = "login.php">vous connecter</a> ! </p>
+            <?php }
             else{
-                echo "Ce nom d'utilisateur est déjà utilisé.";
+                echo "Le nom d'utilisateur ",$_POST['login']," est déjà utilisé.";
+                ?> <br> <?php
             }
         
         }
