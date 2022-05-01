@@ -44,8 +44,10 @@ table{
     margin:auto;
 }
 
-
-
+.ligne_choix{
+    display: flex;
+    justify-content: space-evenly;
+}
 
 
 

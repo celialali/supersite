@@ -15,7 +15,15 @@ if($BDD) {
     
     <body>
     <div class="container">
-        <?php require_once "header.php"; ?>
+        <?php require_once "header.php"; 
+        
+        // $login = $_SESSION['login'];
+        // $req_profil = "SELECT * FROM profil WHERE login=:unLogin";
+        // $rep_profil = $BDD->prepare($req_profil);
+        // $rep_profil->execute(array("unLogin"=>$login));
+        // $profil = $rep_profil->fetch();
+        // $estAdmin = $profil['admin'];
+        ?>
 
         <h2 class="text-center">SuperSite</h2>
         <h3 class="text-center">Le site dont vous êtes le héros</h3>
@@ -30,7 +38,16 @@ if($BDD) {
                 </td>
                 <td class="well well-sm">
                     <p> 
-                        <h3><a class="histTitle" href="hist.php?id_hist=<?= $histoire['id_hist'] ?>&id_sit=1"><?= $histoire['titre'] ?></a></h3>
+                        <h3>
+                            <?php 
+                            if (isset($_SESSION['login'])) {
+                                ?>
+                                <a class="histTitle" href="hist.php?id_hist=<?= $histoire['id_hist'] ?>&id_sit=1"><?= $histoire['titre'] ?></a>
+                            <?php
+                            }
+                            else { ?> <p><?php echo $histoire['titre'] ?> </p> <?php } 
+                            ?>
+                        </h3>
                         <p class="histContent"><?= $histoire['description'] ?></p>
                     </p>
                 </td>

@@ -46,19 +46,17 @@
                     <?php echo $situation['paragraphe'];?>
                 </p>    
             </div>
-            <table>
-                <tr>
+            <div>
+                <div class="ligne_choix" >
                     <?php foreach ($ensemble_choix as $choix) { ?>
-                   <td>
                         <div class="col-sm">
                             <p>
                                 <a class="btn btn-default btn-secondary" href="hist.php?id_hist=<?= $id_hist ?>&id_sit=<?= $choix['id_sit_suivante']?>"> <?php echo $choix['intitule'] ?> </a>
                             </p>
                         </div>
-                    </td>
                     <?php } ?>
-                </tr>        
-            </table>
+                    </div>        
+                    </div>
         </div>
 
         <?php if ($histoire['id_sit_finale'] == $situation['id_sit']){ ?>

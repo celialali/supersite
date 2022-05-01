@@ -46,7 +46,7 @@
             else{
                 $_SESSION['login'] = $login;
                 $utilisateur = $reponse->fetch();
-                $estAdmin = $utilisateur['admin'];
+                $_SESSION['admin'] = $utilisateur['admin'];
                 header("Location: index.php");
             }
 
