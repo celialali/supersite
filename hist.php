@@ -66,6 +66,7 @@
                 <p class="text-center">
                     <img class="responsive-image" src="img/welldone.png" width="170"/>
                 </p>
+                <br>
                 <a class="btn btn-default btn-primary" href="index.php">Retourner à l'accueil</a>
             </div>
 
