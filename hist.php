@@ -46,6 +46,7 @@
                     <?php echo $situation['paragraphe'];?>
                 </p>    
             </div>
+            <br>
             <div>
                 <div class="ligne_choix" >
                     <?php foreach ($ensemble_choix as $choix) { ?>
@@ -61,15 +62,16 @@
 
         <?php if ($histoire['id_sit_finale'] == $situation['id_sit']){ ?>
             <div class = "paragraph text-center">
-                Bravo, vous êtes arrivé au bout de l'histoire !
+                <h3>Bravo, vous êtes arrivé au bout de l'histoire !</h3>
                 <p class="text-center">
                     <img class="responsive-image" src="img/welldone.png" width="170"/>
                 </p>
+                <a class="btn btn-default btn-primary" href="index.php">Retourner à l'accueil</a>
             </div>
 
         <?php }
         ?>
-
+        <br>
         <?php require_once "footer.php"?>
 
     </body>
