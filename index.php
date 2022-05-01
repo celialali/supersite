@@ -16,17 +16,14 @@ if($BDD) {
     <body>
     <div class="container">
         <?php require_once "header.php"; 
-        
-        // $login = $_SESSION['login'];
-        // $req_profil = "SELECT * FROM profil WHERE login=:unLogin";
-        // $rep_profil = $BDD->prepare($req_profil);
-        // $rep_profil->execute(array("unLogin"=>$login));
-        // $profil = $rep_profil->fetch();
-        // $estAdmin = $profil['admin'];
         ?>
 
         <h2 class="text-center">SuperSite</h2>
         <h3 class="text-center">Le site dont vous êtes le héros</h3>
+        <?php if(!isset($_SESSION['login'])){
+            ?> <br>
+            <p> <a href="login.php">Connectez-vous</a> ou <a href="register.php">inscrivez-vous</a> pour avoir accès aux histoires !</p>
+        <?php } ?>
         <table>
         <?php foreach ($histoires as $histoire) { ?>
             <hr/>

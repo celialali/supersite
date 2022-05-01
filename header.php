@@ -13,7 +13,7 @@
         
         
         <?php
-        if (isset($_SESSION['login']) and $_SESSION['admin']==1) { ?> <!-- J'ai pas trouvé comment vérifier si c'est un admin ou pas-->
+        if (isset($_SESSION['login']) and $_SESSION['admin']==1) { ?> 
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
