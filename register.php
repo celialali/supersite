@@ -44,17 +44,29 @@
         </div>
 
         <?php
+
         if(isset($_POST['login']) && isset($_POST['password'])){
-            $login=$_POST['login'];
-        $motdepasse = $_POST['password'];
-        $admin=$_POST["admin"];
-        if($BDD){
-            $req = "INSERT INTO profil (login,mdp,admin) VALUES (:logi,:mdp,:admin)";
-            $prepare=$BDD ->prepare($req);
-            $prepare -> execute(array(":logi"=>$login,
-                                ":mdp"=>$motdepasse,
-                                ":admin"=>$admin));
+            // on vérifie qu'il n'y a pas déjà un utilisateur avec le même login
+            $req_login = "SELECT * FROM profil WHERE login=:leLogin";
+            $rep_login = $BDD->prepare($req_login);
+            $rep_login -> execute(array("leLogin"=>$_POST['login']));
+            $nb_login = $rep_login->rowCount();
+
+            if($nb_login==0){
+                $login=$_POST['login'];
+                $motdepasse = $_POST['password'];
+                $admin=$_POST["admin"];
+                             
+                if($BDD){
+                $req = "INSERT INTO profil (login,mdp,admin) VALUES (:logi,:mdp,:admin)";
+                $prepare=$BDD ->prepare($req);
+                $prepare -> execute(array(":logi"=>$login, ":mdp"=>$motdepasse, ":admin"=>$admin));
+                }  
             }
+            else{
+                echo "Ce nom d'utilisateur est déjà utilisé.";
+            }
+        
         }
 
 
