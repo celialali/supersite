@@ -46,12 +46,13 @@
         }
 
         // on met à jour la situation en cours
-        if ($n==1){
+        if ($n==1 && $lecture['id_sit_en_cours']!=$id_sit){
             echo $lecture['id_sit_en_cours'];
             echo $id_hist;
-            echo "hist.php?id_hist=<?=$id_hist?>&id_sit=<?=$lecture['id_sit_en_cours']?>";
-            $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsit WHERE id_hist=:idhist AND id_profil=:idprofil");
-            $req_maj_sit->execute(array("idsit"=>$id_sit, "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
+            echo "hist.php?id_hist=",$id_hist,"&id_sit=",$lecture['id_sit_en_cours'];
+            header("Location:hist.php?id_hist=1&id_sit=1");
+            //$req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsit WHERE id_hist=:idhist AND id_profil=:idprofil");
+            //$req_maj_sit->execute(array("idsit"=>$id_sit, "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
         }
         
 
