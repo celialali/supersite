@@ -50,8 +50,20 @@ table{
     justify-content: space-evenly;
 }
 
+.col1 {
+    margin-left: 5%;
+    margin-bottom: 2%;
+    width: 20%;
+}
 
+.col2 {
+    width: 60%;
+}
 
 .liste{
     padding-bottom: 5px;
+}
+.ligne{
+    display:flex;
+    /* text-align: center; */
 }

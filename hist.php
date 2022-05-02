@@ -36,6 +36,8 @@
         $rep_lecture_existente = $BDD->prepare($req_lecture_existente);
         $rep_lecture_existente->execute(array("unIDprofil"=>$_SESSION['id_profil'], "unIDhist"=>$id_hist));
         $n = $rep_lecture_existente->rowCount();
+        $lecture = $rep_lecture_existente->fetch();
+        echo $lecture['id_sit_en_cours'];
         //si non, on la crée
         if ($n==0){
             $req_ajout_lecture = "INSERT INTO lecture(id_hist,id_profil,id_sit_en_cours) VALUES (:idhist,:idprofil,:idsit)";
@@ -45,6 +47,9 @@
 
         // on met à jour la situation en cours
         if ($n==1){
+            echo $lecture['id_sit_en_cours'];
+            echo $id_hist;
+            echo "hist.php?id_hist=<?=$id_hist?>&id_sit=<?=$lecture['id_sit_en_cours']?>";
             $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsit WHERE id_hist=:idhist AND id_profil=:idprofil");
             $req_maj_sit->execute(array("idsit"=>$id_sit, "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
         }
@@ -84,10 +89,10 @@
             <div class = "paragraph text-center">
                 <h3>Bravo, vous êtes arrivé au bout de l'histoire !</h3>
                 <p class="text-center">
-                    <img class="responsive-image" src="img/welldone.png" width="170"/>
+                    <img class="responsive-image" src="img/welldone.gif" width="170"/>
                 </p>
                 <br>
-                <a class="btn btn-default btn-primary" href="index.php">Retourner à l'accueil</a>
+                <a class="btn btn-default btn-warning" href="index.php">Retourner à l'accueil</a>
             </div>
 
         <?php 

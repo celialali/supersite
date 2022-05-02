@@ -28,18 +28,14 @@ if($BDD) {
 
 
         ?>
-         <table>
+        <div class="container">
             <hr/>
-        <?php foreach ($histoires as $histoire) { ?>
-            <article>
-           
-            <tr>
-                <td>
-                    <img class="img-responsive" src="img/<?= $histoire['image'] ?>" title="<?= $histoire['titre'] ?>" width ="200"/>
-
-                </td>
-                <td >
-                    <p> 
+            <?php foreach ($histoires as $histoire) { ?>
+                <div class="ligne">
+                    <div class="col1" ><img class="img-responsive" src="img/<?= $histoire['image'] ?>" title="<?= $histoire['titre'] ?>" width ="200"/>
+                    </div>
+                
+                    <div class="col2" > 
                         <h3>
                             <?php 
                             if (isset($_SESSION['login'])) {
@@ -51,14 +47,11 @@ if($BDD) {
                             ?>
                         </h3>
                         <p class="histContent"><?= $histoire['description'] ?></p>
-                    </p>
-                </td>
-            </tr>
-            
-            </article>
-     
-        <?php } ?>
-        </table>
+                        </div>
+                </div>
+                    
+            <?php } ?>
+        </div>
      
         <br/>
 
