@@ -47,6 +47,7 @@
                 $_SESSION['login'] = $login;
                 $utilisateur = $reponse->fetch();
                 $_SESSION['admin'] = $utilisateur['admin'];
+                $_SESSION['id_profil'] = $utilisateur['id_profil'];
                 header("Location: index.php");
             }
 

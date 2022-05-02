@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2022 at 02:12 PM
+-- Generation Time: May 02, 2022 at 11:55 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.4
 
@@ -72,7 +72,35 @@ CREATE TABLE `histoire` (
 --
 
 INSERT INTO `histoire` (`id_hist`, `titre`, `image`, `description`, `affichee`, `id_sit_initiale`, `id_sit_finale`) VALUES
-(1, 'Monsieur Charles', 'monsieurcharles.png', 'Tous les lundis après l\'école, monsieur Charles nous raconte une histoire. Mais aujourd\'hui, j\'ai l\'impression que la situation est différente...', 1, 1, 11);
+(1, 'Monsieur Charles', 'monsieurcharles.png', 'Tous les lundis après l\'école, monsieur Charles nous raconte une histoire. Mais aujourd\'hui, j\'ai l\'impression que la situation est différente...', 1, 1, 11),
+(2, 'La deuxième super histoire', 'monstrechat.png', 'Cette histoire de folie vous emmènera dans les tréfonds de l\'ENSC ainsi qu\'à la découverte, entre autres, du monstre sous le patio.', 1, 14, 14);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecture`
+--
+
+CREATE TABLE `lecture` (
+  `id_lecture` int(11) NOT NULL,
+  `id_hist` int(11) NOT NULL,
+  `id_profil` int(11) NOT NULL,
+  `nb_vies` int(11) NOT NULL DEFAULT 3,
+  `nb_fois_jouee` int(11) NOT NULL DEFAULT 0,
+  `nb_morts` int(11) NOT NULL DEFAULT 0,
+  `nb_victoires` int(11) NOT NULL DEFAULT 0,
+  `id_sit_en_cours` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lecture`
+--
+
+INSERT INTO `lecture` (`id_lecture`, `id_hist`, `id_profil`, `nb_vies`, `nb_fois_jouee`, `nb_morts`, `nb_victoires`, `id_sit_en_cours`) VALUES
+(1, 1, 5, 3, 0, 0, 0, 1),
+(2, 2, 5, 3, 0, 0, 0, 14),
+(3, 1, 16, 3, 1, 0, 2, 1),
+(4, 2, 16, 3, 3, 0, 9, 14);
 
 -- --------------------------------------------------------
 
@@ -93,7 +121,9 @@ CREATE TABLE `profil` (
 
 INSERT INTO `profil` (`id_profil`, `login`, `mdp`, `admin`) VALUES
 (3, 'correcteur', 'mdp_correcteur_1234', 0),
-(4, 'correcteur_admin', 'mdp_correcteur_1234', 1);
+(4, 'correcteur_admin', 'mdp_correcteur_1234', 1),
+(5, 'lalali', 'lalala', 1),
+(16, 'lalalou', 'lalala', 0);
 
 -- --------------------------------------------------------
 
@@ -123,7 +153,8 @@ INSERT INTO `situation` (`id_sit`, `paragraphe`, `id_hist`) VALUES
 (9, 'Nous suivons la dame. Lucie avait un peu peur, mais je l’ai encouragée : nous devons savoir ce qui est arrivé à monsieur Charles. Nous courons jusqu’à la grille.', 1),
 (10, 'Nous avons perdu la trace de la dame. Nous retournons sur nos pas.\r\n', 1),
 (11, 'Nous voyons la dame entrer dans un immeuble. Nous la suivons et voyons au loin un Monsieur en rouge. Nous appelons « Monsieur Charles, monsieur Charles !!! ». Monsieur Charles nous attend tranquillement sur le palier. Il nous dit bonjour et nous demande ce que nous faisons ici. Nous lui racontons alors notre histoire de détectives. Mais voilà que monsieur Charles se met à rire : « Mais Rose est mon aide-ménagère ! Quand je suis malade, je prête mon panier pour qu’elle aille faire mes courses. Nous avons tous bien rigolé et nous avons eu droit à une très belle histoire comme tous les lundis soirs. ', 1),
-(12, 'Gros LOOSER c\'est PERDU', 1);
+(12, 'Gros LOOSER c\'est PERDU', 1),
+(14, 'Lol c\'est déjà terminé', 2);
 
 --
 -- Indexes for dumped tables
@@ -140,6 +171,12 @@ ALTER TABLE `choix`
 --
 ALTER TABLE `histoire`
   ADD PRIMARY KEY (`id_hist`);
+
+--
+-- Indexes for table `lecture`
+--
+ALTER TABLE `lecture`
+  ADD PRIMARY KEY (`id_lecture`);
 
 --
 -- Indexes for table `profil`
@@ -167,17 +204,23 @@ ALTER TABLE `choix`
 -- AUTO_INCREMENT for table `histoire`
 --
 ALTER TABLE `histoire`
-  MODIFY `id_hist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_hist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `lecture`
+--
+ALTER TABLE `lecture`
+  MODIFY `id_lecture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `profil`
 --
 ALTER TABLE `profil`
-  MODIFY `id_profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `situation`
 --
 ALTER TABLE `situation`
-  MODIFY `id_sit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_sit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;

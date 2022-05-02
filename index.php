@@ -21,12 +21,16 @@ if($BDD) {
         <h2 class="text-center">SuperSite</h2>
         <h3 class="text-center">Le site dont vous êtes le héros</h3>
         <?php if(!isset($_SESSION['login'])){
-            ?> <br>
-            <p> <a href="login.php">Connectez-vous</a> ou <a href="register.php">inscrivez-vous</a> pour avoir accès aux histoires !</p>
-        <?php } ?>
+            ?> 
+            <p> <br> <a class="lien" href="login.php">Connectez-vous</a> ou <a class="lien" href="register.php">inscrivez-vous</a> pour avoir accès aux histoires !</p>
+        <?php } 
+
+
+
+        ?>
         <table>
-        <?php foreach ($histoires as $histoire) { ?>
             <hr/>
+        <?php foreach ($histoires as $histoire) { ?>
             <article>
             <tr>
                 <td>
@@ -39,7 +43,7 @@ if($BDD) {
                             <?php 
                             if (isset($_SESSION['login'])) {
                                 ?>
-                                <a class="histTitle" href="hist.php?id_hist=<?= $histoire['id_hist'] ?>&id_sit=1"><?= $histoire['titre'] ?></a>
+                                <a class="lien" href="hist.php?id_hist=<?= $histoire['id_hist'] ?>&id_sit=<?=$histoire['id_sit_initiale']?>"><?= $histoire['titre'] ?></a>
                             <?php
                             }
                             else { ?> <p><?php echo $histoire['titre'] ?> </p> <?php } 

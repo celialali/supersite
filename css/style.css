@@ -1,5 +1,5 @@
 body {
-    padding: 4%;
+    padding: 5%;
 }
 
 .footer {
@@ -9,8 +9,8 @@ body {
     text-align: center;
 }
 
-.histTitle:hover,
-.histTitle:focus {
+.lien:hover,
+.lien:focus {
     text-decoration: none;
 }
 

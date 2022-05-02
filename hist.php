@@ -30,6 +30,26 @@
         $rep_choix = $BDD->prepare($req_choix);
         $rep_choix->execute(array("unIDsit"=>$id_sit));
         $ensemble_choix = $rep_choix->fetchAll();
+
+        // on regarde s'il existe une lecture correspondant à cet utilisateur et cette histoire
+        $req_lecture_existente = "SELECT * FROM lecture WHERE id_profil=:unIDprofil AND id_hist=:unIDhist";
+        $rep_lecture_existente = $BDD->prepare($req_lecture_existente);
+        $rep_lecture_existente->execute(array("unIDprofil"=>$_SESSION['id_profil'], "unIDhist"=>$id_hist));
+        $n = $rep_lecture_existente->rowCount();
+        //si non, on la crée
+        if ($n==0){
+            $req_ajout_lecture = "INSERT INTO lecture(id_hist,id_profil,id_sit_en_cours) VALUES (:idhist,:idprofil,:idsit)";
+            $rep_ajout_lecture = $BDD->prepare($req_ajout_lecture);
+            $rep_ajout_lecture->execute(array("idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil'], "idsit"=>$id_sit));
+        }
+
+        // on met à jour la situation en cours
+        if ($n==1){
+            $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsit WHERE id_hist=:idhist AND id_profil=:idprofil");
+            $req_maj_sit->execute(array("idsit"=>$id_sit, "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
+        }
+        
+
     }
 ?>
 
@@ -70,7 +90,13 @@
                 <a class="btn btn-default btn-primary" href="index.php">Retourner à l'accueil</a>
             </div>
 
-        <?php }
+        <?php 
+        // remet la situation en cours à la situation initiale pour pouvoir recommencer l'histoire
+        // ajoute une victoire et une fois jouee
+            $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsitinit, nb_victoires=nb_victoires+1, nb_fois_jouee=nb_fois_jouee+1 WHERE id_hist=:idhist AND id_profil=:idprofil");
+            $req_maj_sit->execute(array("idsitinit"=>$histoire['id_sit_initiale'], "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
+
+        }
         ?>
         <br>
         <?php require_once "footer.php"?>
