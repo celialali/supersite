@@ -28,16 +28,17 @@ if($BDD) {
 
 
         ?>
-        <table>
+         <table>
             <hr/>
         <?php foreach ($histoires as $histoire) { ?>
             <article>
+           
             <tr>
                 <td>
                     <img class="img-responsive" src="img/<?= $histoire['image'] ?>" title="<?= $histoire['titre'] ?>" width ="200"/>
 
                 </td>
-                <td class="well well-sm">
+                <td >
                     <p> 
                         <h3>
                             <?php 
@@ -53,6 +54,7 @@ if($BDD) {
                     </p>
                 </td>
             </tr>
+            
             </article>
      
         <?php } ?>

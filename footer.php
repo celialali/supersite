@@ -1,4 +1,6 @@
+
 <footer class="footer">
+
     Par Célia et Chloé
     <!-- jQuery -->
 <script src="lib/jquery/jquery.min.js"></script>

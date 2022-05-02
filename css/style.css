@@ -44,15 +44,14 @@ table{
     margin:auto;
 }
 
+
 .ligne_choix{
     display: flex;
     justify-content: space-evenly;
 }
 
-.test{
-    display:flex;
-    justify-content: space-evenly;
-    
+
+
+.liste{
+    padding-bottom: 5px;
 }
-
-
