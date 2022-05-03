@@ -5,37 +5,38 @@
     require "header.php";?>
     <body>
         <h2 class="text-center">Ajouter une histoire</h2>
-
-        <p>Combien de situations voulez-vous écrire ?</p>
-        <form class="form-signin form-horizontal" role="form" action="ajout_hist.php" method="post">
-            <input type="text" name="nbsit">
-            <button type="submit" class="btn btn-default btn-secondary"> Enregistrer</button>
-            <?php 
-            $nbsituation = 0;
-            if(isset($_POST['nbsit'])){
-                $nbsituation=$_POST['nbsit'];}?>
-        </form>
-
-        <form>
-            <p class="text-center">Entrez les situations présentes dans votre histoire</p>
-                <fieldset><legend>Situations</legend>
-                <?php for($i=1;$i<=$nbsituation;$i++){?>
+        <div class="well">
+            <form class="form-signin form-horizontal" role="form" action="ajout_hist.php" method="post">
                 <div class="form-group">
-                   
-                    <div class="form-group">
-                  
-                        <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                        <p class="text-center">Situation <?php echo $i?></p>
-                            <textarea name="situation" class="form-control" placeholder="Ecrivez le paragraphe correspondant à la situation" rows="3"></textarea><br/><br/>
-                        </div>
+                    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                        <p class="text-center">Quel est le titre de votre histoire ?</p>
+                        <input type="text" name="titre" class="form-control" placeholder="Entrez le titre de votre histoire" required autofocus>
                     </div>
                 </div>
-                <?php } ?>
-                </fieldset>
-                <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                    <button type="submit" class="btn btn-default btn-secondary"><span class="glyphicon"></span> Enregistrer</button>
+                <div class="form-group">
+                    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                    <p class="text-center">Quel est le résumé de votre histoire ?</p>
+                        <textarea name="description" class="form-control" placeholder="Décrivez votre histoire" required></textarea>
+                    </div>
                 </div>
-        </form>
+                
+                <div class="form-group">
+                    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                        <button type="submit" class="btn btn-default btn-secondary">Enregistrer</button>
+                    </div>
+                </div>
+            </form>
+            <?php if(isset($_POST['titre']) && isset($_POST['description'])){
+                    $titre = $_POST['titre'];
+                    $description = $_POST['description'];
+                    if($BDD){
+                        $req = "INSERT INTO histoire (titre,description) VALUES (:ttre,:descr)";
+                        $prepare=$BDD ->prepare($req);
+                        $prepare -> execute(array("ttre"=>$titre, "descr"=>$description));
+                }
+            } 
+            
+            header('situations.php');?>
 
     
         
