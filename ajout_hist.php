@@ -6,12 +6,13 @@
     <body>
         <h2 class="text-center">Ajouter une histoire</h2>
         <div class="well">
-            <form class="form-signin form-horizontal" role="form" action="ajout_hist.php" method="post">
+            <form class="form-signin form-horizontal" role="form" action="situations.php" method="post">
                 <div class="form-group">
                     <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                         <p class="text-center">Quel est le titre de votre histoire ?</p>
                         <input type="text" name="titre" class="form-control" placeholder="Entrez le titre de votre histoire" required autofocus>
                     </div>
+                    <!--Ajout d'une image-->
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
@@ -26,23 +27,9 @@
                     </div>
                 </div>
             </form>
-            <?php if(isset($_POST['titre']) && isset($_POST['description'])){
-                    $titre = $_POST['titre'];
-                    $description = $_POST['description'];
-                    if($BDD){
-                        $req = "INSERT INTO histoire (titre,description) VALUES (:ttre,:descr)";
-                        $prepare=$BDD ->prepare($req);
-                        $prepare -> execute(array("ttre"=>$titre, "descr"=>$description));
-                }
-            } 
             
-            header('situations.php');?>
-
-    
-        
-<br/>
-<br/>
-        <?php require "footer.php";?>
+        </div>
     </body>
+    <?php require "footer.php";?>
 
 </html>

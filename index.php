@@ -15,7 +15,7 @@ if($BDD) {
     
     <body>
     <div class="container">
-        <?php require_once "header.php"; 
+        <?php require_once "header.php";
         ?>
 
         <h2 class="text-center">SuperSite</h2>

@@ -3,6 +3,16 @@
     <?php require "head.php";
     require "connect.php";
     require "header.php";?>
+
+    <?php if(isset($_POST['titre']) && isset($_POST['description'])){
+                    $titre = $_POST['titre'];
+                    $description = $_POST['description'];
+                    if($BDD){
+                        $req = "INSERT INTO histoire (titre,description) VALUES (:ttre,:descr)";
+                        $prepare=$BDD ->prepare($req);
+                        $prepare -> execute(array("ttre"=>$titre, "descr"=>$description));
+                }
+            } ?>
     <body>
         <h2 class="text-center">Ajouter une histoire</h2>
         <div class="well">
@@ -12,8 +22,11 @@
             <button type="submit" class="btn btn-default btn-secondary"> Enregistrer</button>
             <?php 
             $nbsituation = 0;
-            if(isset($_POST['nbsit'])){
-                $nbsituation=$_POST['nbsit'];}?>
+            if(isset($_POST['nbsit']) && is_numeric($_POST['nbsit']) ){ //Vérifier que c'est un chiffre 
+                $nbsituation=$_POST['nbsit'];}
+                else if(isset($_POST['nbsit']) && !is_numeric($_POST['nbsit'])){
+                    echo "Erreur de saisie, veuillez rentrer un nombre !";
+                }?>
         </form>
 
         <form>
@@ -37,11 +50,7 @@
                 </div>
         </form>
         </div>
-    
-        
-<br/>
-<br/>
-        <?php require "footer.php";?>
     </body>
+    <?php require "footer.php";?>
 
 </html>
