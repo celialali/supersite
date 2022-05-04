@@ -3,8 +3,8 @@
     require "header.php";?>
     <body>
         <h2 class="text-center">Gérer les histoires</h2>
-        <div class="well">
-            <form class="form-signin form-horizontal" role="form" action="gerer_hist.php" method="post">
+        <div>
+            
                 <?php if($BDD){
                     $req = "SELECT * FROM histoire ORDER BY id_hist";
                     $reponse = $BDD->prepare($req);
@@ -13,7 +13,10 @@
                 }
                 foreach($histoires as $histoire){?>
                         <?php echo $histoire['titre']?>
+                        <form class="form-signin form-horizontal" role="form" action="modif.php" method="post">
                             <button type="submit" name="editer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-edit"></span> Editer</button>
+                        </form>
+                        <form class="form-signin form-horizontal" role="form" action="gerer_hist.php" method="post">
                             <?php if($histoire['affichee']==1){?>
                                 <button type="submit" name="masquer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-lock"></span> Masquer</button>
 
@@ -22,12 +25,12 @@
                                     <button type="submit" name ="afficher" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-unlock"></span> Afficher</button>
 
                             <?php } ?>
-                    
-                                <button type="submit" name ="supprimer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-trash"></span> Supprimer</button><br/>
+                        
 
-                <?php } ?>
-                </table>
-            </form>
+                            <button type="submit" name ="supprimer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-trash"></span> Supprimer</button><br/>
+                        <?php } ?>
+                        </form>
+            
         </div>
     </body>
 <?php require "footer.php";?>
