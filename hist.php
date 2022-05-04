@@ -3,6 +3,7 @@
 <?php 
     require "connect.php";
     require "head.php";
+
     // on récupère l'id de l'histoire dans l'url
     if(isset($_GET['id_hist']) and isset($_GET['id_sit'])){
         $id_hist = $_GET['id_hist'];
@@ -37,24 +38,31 @@
         $rep_lecture_existente->execute(array("unIDprofil"=>$_SESSION['id_profil'], "unIDhist"=>$id_hist));
         $n = $rep_lecture_existente->rowCount();
         $lecture = $rep_lecture_existente->fetch();
-        echo $lecture['id_sit_en_cours'];
+
         //si non, on la crée
         if ($n==0){
             $req_ajout_lecture = "INSERT INTO lecture(id_hist,id_profil,id_sit_en_cours) VALUES (:idhist,:idprofil,:idsit)";
             $rep_ajout_lecture = $BDD->prepare($req_ajout_lecture);
             $rep_ajout_lecture->execute(array("idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil'], "idsit"=>$id_sit));
         }
-
-        // on met à jour la situation en cours
-        if ($n==1 && $lecture['id_sit_en_cours']!=$id_sit){
-            echo $lecture['id_sit_en_cours'];
-            echo $id_hist;
-            echo "hist.php?id_hist=",$id_hist,"&id_sit=",$lecture['id_sit_en_cours'];
-            header("Location:hist.php?id_hist=1&id_sit=1");
-            //$req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsit WHERE id_hist=:idhist AND id_profil=:idprofil");
-            //$req_maj_sit->execute(array("idsit"=>$id_sit, "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
-        }
         
+        if ($n==1){
+            if ($id_sit==$histoire['id_sit_initiale'] && $lecture['id_sit_en_cours'] != $id_sit){
+            ?>
+            <a href= "hist.php?id_hist=1&id_sit=<?=$lecture['id_sit_en_cours']?>"> Vous aviez déjà commencé cette histoire ! Cliquez ici pour la reprendre. </a>
+            <?php
+            }
+
+            if ($lecture['id_sit_en_cours'] == $id_sit){
+            }
+                $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsit WHERE id_hist=:idhist AND id_profil=:idprofil");
+                $req_maj_sit->execute(array("idsit"=>$id_sit, "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
+        }
+
+        // si la situation actuelle ne correspond pas à la situation enregistrée sur la lecture
+        
+
+     
 
     }
 ?>
@@ -66,6 +74,11 @@
             <div> 
                 <h2> Histoire en cours : <?= $histoire['titre'] ?> </h2>
                 <br/>
+            </div>
+            <div>
+                <p>
+                    Vous avez <?php  ?> vies.
+                </p>
             </div>
             <div class=" paragraph">
                 <p> 
