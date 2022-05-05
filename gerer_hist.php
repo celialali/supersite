@@ -10,13 +10,12 @@
                     $reponse = $BDD->prepare($req);
                     $reponse -> execute();
                     $histoires = $reponse->fetchAll();
-                }
-                foreach($histoires as $histoire){?>
+                }?>
+                <div class="well">
+                <?php foreach($histoires as $histoire){?>
+                        <fieldset>
                         <?php echo $histoire['titre']?>
-                        <form class="form-signin form-horizontal" role="form" action="modif.php" method="post">
                             <button type="submit" name="editer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-edit"></span> Editer</button>
-                        </form>
-                        <form class="form-signin form-horizontal" role="form" action="gerer_hist.php" method="post">
                             <?php if($histoire['affichee']==1){?>
                                 <button type="submit" name="masquer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-lock"></span> Masquer</button>
 
@@ -28,8 +27,27 @@
                         
 
                             <button type="submit" name ="supprimer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-trash"></span> Supprimer</button><br/>
-                        <?php } ?>
-                        </form>
+                        
+                        <?php if(isset($_POST['editer'])){
+                            header('modif.php');
+                        }
+                        if(isset($_POST['afficher'])){
+                            $histoire['affichee']==1;
+                        }
+                        if(isset($_POST['masquer'])){
+                            $histoire['affichee']==0;
+                        }
+
+                        if(isset($_POST['supprimer'])){
+                            if($BDD){
+                                $req = "DELETE FROM histoire WHERE id_hist =:id";
+                                $prepare=$BDD ->prepare($req);
+                                $prepare -> execute(array("id"=>$histoire['id_hist']));
+                                }
+                         } 
+                        } ?>
+                        </fieldset>
+                        </div>
             
         </div>
     </body>
