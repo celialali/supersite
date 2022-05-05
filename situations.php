@@ -4,13 +4,14 @@
     require "connect.php";
     require "header.php";?>
 
-    <?php if(isset($_POST['titre']) && isset($_POST['description'])){
+    <?php if(isset($_POST['titre']) && isset($_POST['description']) && isset($_POST['image'])){
                     $titre = $_POST['titre'];
                     $description = $_POST['description'];
+                    $image = $_POST['image'];
                     if($BDD){
-                        $req = "INSERT INTO histoire (titre,description) VALUES (:ttre,:descr)";
+                        $req = "INSERT INTO histoire (titre,description, image) VALUES (:ttre,:descr, :img)";
                         $prepare=$BDD ->prepare($req);
-                        $prepare -> execute(array("ttre"=>$titre, "descr"=>$description));
+                        $prepare -> execute(array("ttre"=>$titre, "descr"=>$description, ":img"=>$image));
                 }
             } ?>
     <body>
@@ -22,7 +23,7 @@
             <button type="submit" class="btn btn-default btn-secondary"> Enregistrer</button>
             <?php 
             $nbsituation = 0;
-            if(isset($_POST['nbsit']) && is_numeric($_POST['nbsit']) ){ //Vérifier que c'est un chiffre 
+            if(isset($_POST['nbsit']) && is_numeric($_POST['nbsit']) ){
                 $nbsituation=$_POST['nbsit'];}
                 else if(isset($_POST['nbsit']) && !is_numeric($_POST['nbsit'])){
                     echo "Erreur de saisie, veuillez rentrer un nombre !";
