@@ -24,10 +24,8 @@ if($BDD) {
             ?> 
             <p> <br> <a class="lien" href="login.php">Connectez-vous</a> ou <a class="lien" href="register.php">inscrivez-vous</a> pour avoir accès aux histoires !</p>
         <?php } 
-
-
-
         ?>
+        
         <div class="container">
             <hr/>
             <?php foreach ($histoires as $histoire) { ?>
@@ -40,8 +38,10 @@ if($BDD) {
                             <?php 
                             if (isset($_SESSION['login'])) {
                                 ?>
-                                <a class="lien" href="hist.php?id_hist=<?= $histoire['id_hist'] ?>&id_sit=<?=$histoire['id_sit_initiale']?>"><?= $histoire['titre'] ?></a>
-                            <?php
+                                <form method="POST" action="redirection_hist.php">
+                                    <button type="hidden" name="allerHistoire" value="<?=$histoire['id_hist']?>"><?= $histoire['titre'] ?></button>
+                                </form>
+                                <?php
                             }
                             else { ?> <p><?php echo $histoire['titre'] ?> </p> <?php } 
                             ?>
@@ -54,6 +54,7 @@ if($BDD) {
         </div>
      
         <br/>
+        
 
         <?php require_once "footer.php"; ?>
     </div>

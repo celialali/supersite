@@ -32,32 +32,10 @@
         $rep_choix->execute(array("unIDsit"=>$id_sit));
         $ensemble_choix = $rep_choix->fetchAll();
 
-        // on regarde s'il existe une lecture correspondant à cet utilisateur et cette histoire
-        $req_lecture_existente = "SELECT * FROM lecture WHERE id_profil=:unIDprofil AND id_hist=:unIDhist";
-        $rep_lecture_existente = $BDD->prepare($req_lecture_existente);
-        $rep_lecture_existente->execute(array("unIDprofil"=>$_SESSION['id_profil'], "unIDhist"=>$id_hist));
-        $n = $rep_lecture_existente->rowCount();
-        $lecture = $rep_lecture_existente->fetch();
-
-        //si non, on la crée
-        if ($n==0){
-            $req_ajout_lecture = "INSERT INTO lecture(id_hist,id_profil,id_sit_en_cours) VALUES (:idhist,:idprofil,:idsit)";
-            $rep_ajout_lecture = $BDD->prepare($req_ajout_lecture);
-            $rep_ajout_lecture->execute(array("idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil'], "idsit"=>$id_sit));
-        }
         
-        if ($n==1){
-            if ($id_sit==$histoire['id_sit_initiale'] && $lecture['id_sit_en_cours'] != $id_sit){
-            ?>
-            <a href= "hist.php?id_hist=1&id_sit=<?=$lecture['id_sit_en_cours']?>"> Vous aviez déjà commencé cette histoire ! Cliquez ici pour la reprendre. </a>
-            <?php
-            }
-
-            if ($lecture['id_sit_en_cours'] == $id_sit){
-            }
-                $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsit WHERE id_hist=:idhist AND id_profil=:idprofil");
-                $req_maj_sit->execute(array("idsit"=>$id_sit, "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
-        }
+        $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsit WHERE id_hist=:idhist AND id_profil=:idprofil");
+        $req_maj_sit->execute(array("idsit"=>$id_sit, "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
+        
 
         // si la situation actuelle ne correspond pas à la situation enregistrée sur la lecture
         
