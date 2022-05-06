@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2022 at 11:55 AM
+-- Generation Time: May 06, 2022 at 08:21 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.4
 
@@ -26,30 +26,31 @@ CREATE TABLE `choix` (
   `intitule` varchar(150) NOT NULL,
   `vie` int(11) NOT NULL,
   `id_sit_suivante` int(11) NOT NULL,
-  `id_sit_precedente` int(11) NOT NULL
+  `id_sit_precedente` int(11) NOT NULL,
+  `choix_mortel` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `choix`
 --
 
-INSERT INTO `choix` (`id_choix`, `intitule`, `vie`, `id_sit_suivante`, `id_sit_precedente`) VALUES
-(1, 'Prendre mon vélo', 0, 2, 1),
-(2, 'Y aller en courant', 0, 2, 1),
-(3, 'Partir vers le grand arbre', -1, 3, 2),
-(4, 'Partir vers le petit ruisseau', -1, 4, 2),
-(5, 'Partir vers l\'entrée du parc', 1, 6, 2),
-(6, 'Retourner vers le banc vert', 0, 5, 3),
-(7, 'Passer par le petit talus', 0, 5, 4),
-(8, 'Retourner à la maison', 0, 7, 5),
-(9, 'Chercher encore un peu dans le parc', 0, 2, 5),
-(10, 'Retourner vers le banc vert', 0, 5, 6),
-(11, 'Suivre la dame', 1, 9, 7),
-(12, 'Retourner jouer à la GameBoy à la maison', -1, 12, 7),
-(13, 'Mon lacet est défait', -1, 10, 9),
-(14, 'Dire à Fabien de partir devant', 0, 10, 9),
-(15, 'Nous suivons la dame du regard', 1, 11, 9),
-(16, 'Nous retournons sur nos pas', 0, 9, 10);
+INSERT INTO `choix` (`id_choix`, `intitule`, `vie`, `id_sit_suivante`, `id_sit_precedente`, `choix_mortel`) VALUES
+(1, 'Prendre mon vélo', 0, 2, 1, 0),
+(2, 'Y aller en courant', 0, 2, 1, 0),
+(3, 'Partir vers le grand arbre', -1, 3, 2, 0),
+(4, 'Partir vers le petit ruisseau', -1, 4, 2, 0),
+(5, 'Partir vers l\'entrée du parc', 1, 6, 2, 0),
+(6, 'Retourner vers le banc vert', 0, 5, 3, 0),
+(7, 'Passer par le petit talus', 0, 5, 4, 0),
+(8, 'Retourner à la maison', 0, 7, 5, 0),
+(9, 'Chercher encore un peu dans le parc', 0, 2, 5, 0),
+(10, 'Retourner vers le banc vert', 0, 5, 6, 0),
+(11, 'Suivre la dame', 1, 9, 7, 0),
+(12, 'Retourner jouer à la GameBoy à la maison', -1, 0, 7, 1),
+(13, 'Mon lacet est défait', -1, 10, 9, 0),
+(14, 'Dire à Fabien de partir devant', 0, 10, 9, 0),
+(15, 'Nous suivons la dame du regard', 1, 11, 9, 0),
+(16, 'Nous retournons sur nos pas', 0, 9, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -89,18 +90,17 @@ CREATE TABLE `lecture` (
   `nb_fois_jouee` int(11) NOT NULL DEFAULT 0,
   `nb_morts` int(11) NOT NULL DEFAULT 0,
   `nb_victoires` int(11) NOT NULL DEFAULT 0,
-  `id_sit_en_cours` int(11) NOT NULL
+  `id_sit_en_cours` int(11) NOT NULL,
+  `en_cours` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `lecture`
 --
 
-INSERT INTO `lecture` (`id_lecture`, `id_hist`, `id_profil`, `nb_vies`, `nb_fois_jouee`, `nb_morts`, `nb_victoires`, `id_sit_en_cours`) VALUES
-(1, 1, 5, 3, 0, 0, 0, 1),
-(2, 2, 5, 3, 0, 0, 0, 14),
-(3, 1, 16, 3, 1, 0, 2, 1),
-(4, 2, 16, 3, 3, 0, 9, 14);
+INSERT INTO `lecture` (`id_lecture`, `id_hist`, `id_profil`, `nb_vies`, `nb_fois_jouee`, `nb_morts`, `nb_victoires`, `id_sit_en_cours`, `en_cours`) VALUES
+(24, 2, 5, 3, 4, 0, 4, 14, 0),
+(25, 1, 5, 3, 7, 4, 3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -153,7 +153,6 @@ INSERT INTO `situation` (`id_sit`, `paragraphe`, `id_hist`) VALUES
 (9, 'Nous suivons la dame. Lucie avait un peu peur, mais je l’ai encouragée : nous devons savoir ce qui est arrivé à monsieur Charles. Nous courons jusqu’à la grille.', 1),
 (10, 'Nous avons perdu la trace de la dame. Nous retournons sur nos pas.\r\n', 1),
 (11, 'Nous voyons la dame entrer dans un immeuble. Nous la suivons et voyons au loin un Monsieur en rouge. Nous appelons « Monsieur Charles, monsieur Charles !!! ». Monsieur Charles nous attend tranquillement sur le palier. Il nous dit bonjour et nous demande ce que nous faisons ici. Nous lui racontons alors notre histoire de détectives. Mais voilà que monsieur Charles se met à rire : « Mais Rose est mon aide-ménagère ! Quand je suis malade, je prête mon panier pour qu’elle aille faire mes courses. Nous avons tous bien rigolé et nous avons eu droit à une très belle histoire comme tous les lundis soirs. ', 1),
-(12, 'Gros LOOSER c\'est PERDU', 1),
 (14, 'Lol c\'est déjà terminé', 2);
 
 --
@@ -210,7 +209,7 @@ ALTER TABLE `histoire`
 -- AUTO_INCREMENT for table `lecture`
 --
 ALTER TABLE `lecture`
-  MODIFY `id_lecture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_lecture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `profil`

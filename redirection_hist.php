@@ -21,13 +21,14 @@ if($BDD){
 
         // si oui, on renvoie sur la situation en cours dans la lecture
         if ($n==1){
+            
             $targetLink = "hist.php?id_hist=".$histoire['id_hist']."&id_sit=".$lecture['id_sit_en_cours'];
             header('Location: '.$targetLink);
         }
 
         // si non, on la crée et on renvoie sur la page de la situation initiale
         if ($n==0){
-            $req_ajout_lecture = "INSERT INTO lecture(id_hist,id_profil,id_sit_en_cours) VALUES (:idhist,:idprofil,:idsit)";
+            $req_ajout_lecture = "INSERT INTO lecture(id_hist,id_profil,id_sit_en_cours,en_cours) VALUES (:idhist,:idprofil,:idsit,1)";
             $rep_ajout_lecture = $BDD->prepare($req_ajout_lecture);
             $rep_ajout_lecture->execute(array("idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil'], "idsit"=>$histoire['id_sit_initiale']));
             $targetLink = "hist.php?id_hist=".$histoire['id_hist']."&id_sit=".$histoire['id_sit_initiale']; 
