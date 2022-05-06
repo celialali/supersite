@@ -26,13 +26,12 @@
         ));
         $situation = $rep_sit->fetch();
 
-        // on recupere la lecture en cours
-        // $req_lecture = $BDD->prepare("SELECT * FROM lecture WHERE id_profil=:idprofil AND id_hist=:idhist");
-        // $req_lecture->execute(array(
-        //     "idprofil"=>$_SESSION['id_profil'],
-        //     "idhist"=>$id_hist
-        // ));
-        // $lecture = $req_lecture->fetch();
+        $req_lecture = $BDD->prepare("SELECT * FROM lecture WHERE id_hist=:idhist AND id_profil=:idprofil");
+        $req_lecture->execute(array(
+            "idhist"=>$id_hist, 
+            "idprofil"=>$_SESSION['id_profil']
+        ));
+        $lecture = $req_lecture->fetch();
 
         // on recupere la liste des choix possibles
         $req_choix = "SELECT * FROM choix WHERE id_sit_precedente=:unIDsit";
@@ -43,7 +42,6 @@
         // on met à jour la situation en cours
         $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsit WHERE id_hist=:idhist AND id_profil=:idprofil");
         $req_maj_sit->execute(array("idsit"=>$id_sit, "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
-        
     }
 ?>
 
@@ -53,11 +51,12 @@
             <?php require_once "header.php"; ?>
             <div> 
                 <h2> Histoire en cours : <?= $histoire['titre'] ?> </h2>
+                <hr>
                 <br/>
             </div>
             <div>
                 <p>
-                    Vous avez <?php  ?> vies.
+                    <span class="glyphicon glyphicon-heart"></span> <?php echo $lecture['nb_vies'] ?> vies
                 </p>
             </div>
             <div class=" paragraph">
@@ -74,9 +73,8 @@
                                 <form method="POST" action="redirection_choix.php">
                                     <input type="hidden" name="id_choix" value=<?=$choix['id_choix']?>>
                                     <input type="hidden" name="id_hist" value=<?=$histoire['id_hist']?>>
-                                    <button type='submit'><?= $choix['intitule'] ?></button>
+                                    <button class="btn btn-default btn-secondary" type='submit'><?= $choix['intitule'] ?></button>
                                 </form>
-                                <a class="btn btn-default btn-secondary" href="hist.php?id_hist=<?= $id_hist ?>&id_sit=<?= $choix['id_sit_suivante']?>"> <?php echo $choix['intitule'] ?> </a>
                             </p>
                         </div>
                     <?php } ?>
@@ -98,10 +96,16 @@
             <?php 
             // remet la situation en cours à la situation initiale pour pouvoir recommencer l'histoire
             // ajoute une victoire et une fois jouee
-            $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsitinit, nb_victoires=nb_victoires+1, nb_fois_jouee=nb_fois_jouee+1 WHERE id_hist=:idhist AND id_profil=:idprofil");
+            $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsitinit, nb_victoires=nb_victoires+1, nb_fois_jouee=nb_fois_jouee+1, nb_vies=3 WHERE id_hist=:idhist AND id_profil=:idprofil");
             $req_maj_sit->execute(array("idsitinit"=>$histoire['id_sit_initiale'], "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
 
         }
+
+        if ($lecture['nb_vies'] == 0){
+            header("Location: defaite.php?id_hist=".$id_hist);
+            ?>
+            
+        <?php }
         ?>
         <br>
         
