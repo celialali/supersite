@@ -37,7 +37,6 @@ if(isset($_POST['afficher'])){
                                
                                 }
                             }
-                        
 
                             if(isset($_POST['supprimer'])){
                                 $id_hist=$_POST["supprimer"];
@@ -51,7 +50,6 @@ if(isset($_POST['afficher'])){
                                     $hist = $BDD->prepare($req2);
                                     $hist -> execute(array(
                                         'id'=>$id_hist));
-
                             }
                         }
                             header("Location: gerer_hist.php");

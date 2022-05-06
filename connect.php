@@ -1,6 +1,6 @@
 <?php try {
-$BDD = new PDO( "mysql:host=localhost;dbname=cribarddelc;charset=utf8",
-"cribarddelc", "SuperSite33", array(PDO::ATTR_ERRMODE
+$BDD = new PDO( "mysql:host=localhost;dbname=superhistoire;charset=utf8",
+"test", "test", array(PDO::ATTR_ERRMODE
 =>PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e) {

@@ -30,7 +30,7 @@
                 }?>
         </form>
 
-        <form>
+        <form class="form-signin form-horizontal" role="form" action="choix.php" method="post">
             <p class="text-center">Entrez les situations présentes dans votre histoire</p>
                 <fieldset><legend>Situations</legend>
                 <?php for($i=1;$i<=$nbsituation;$i++){?>
@@ -40,16 +40,19 @@
                   
                         <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                         <p class="text-center">Situation <?php echo $i?></p>
-                            <textarea name="situation" class="form-control" placeholder="Ecrivez le paragraphe correspondant à la situation" rows="3"></textarea><br/><br/>
+                            <textarea name="situation<?php echo $i?>" class="form-control" placeholder="Ecrivez le paragraphe correspondant à la situation" rows="3"></textarea><br/><br/>
                         </div>
                     </div>
                 </div>
                 <?php } ?>
-                </fieldset>
                 <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                     <button type="submit" class="btn btn-default btn-secondary"><span class="glyphicon"></span> Enregistrer</button>
                 </div>
+
+                </fieldset>
+                
         </form>
+        
         </div>
     </body>
     <?php require "footer.php";?>
