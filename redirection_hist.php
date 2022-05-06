@@ -4,7 +4,6 @@ require('head.php');
 if($BDD){
     if(ISSET($_POST['allerHistoire'])){
 
-        echo $_POST['allerHistoire'];
         $id_hist = $_POST['allerHistoire'];
 
         // on recupere l'histoire en cours

@@ -26,22 +26,24 @@
         ));
         $situation = $rep_sit->fetch();
 
+        // on recupere la lecture en cours
+        // $req_lecture = $BDD->prepare("SELECT * FROM lecture WHERE id_profil=:idprofil AND id_hist=:idhist");
+        // $req_lecture->execute(array(
+        //     "idprofil"=>$_SESSION['id_profil'],
+        //     "idhist"=>$id_hist
+        // ));
+        // $lecture = $req_lecture->fetch();
+
         // on recupere la liste des choix possibles
         $req_choix = "SELECT * FROM choix WHERE id_sit_precedente=:unIDsit";
         $rep_choix = $BDD->prepare($req_choix);
         $rep_choix->execute(array("unIDsit"=>$id_sit));
         $ensemble_choix = $rep_choix->fetchAll();
 
-        
+        // on met à jour la situation en cours
         $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsit WHERE id_hist=:idhist AND id_profil=:idprofil");
         $req_maj_sit->execute(array("idsit"=>$id_sit, "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
         
-
-        // si la situation actuelle ne correspond pas à la situation enregistrée sur la lecture
-        
-
-     
-
     }
 ?>
 
@@ -69,6 +71,11 @@
                     <?php foreach ($ensemble_choix as $choix) { ?>
                         <div class="col-sm">
                             <p>
+                                <form method="POST" action="redirection_choix.php">
+                                    <input type="hidden" name="id_choix" value=<?=$choix['id_choix']?>>
+                                    <input type="hidden" name="id_hist" value=<?=$histoire['id_hist']?>>
+                                    <button type='submit'><?= $choix['intitule'] ?></button>
+                                </form>
                                 <a class="btn btn-default btn-secondary" href="hist.php?id_hist=<?= $id_hist ?>&id_sit=<?= $choix['id_sit_suivante']?>"> <?php echo $choix['intitule'] ?> </a>
                             </p>
                         </div>
@@ -77,7 +84,8 @@
                     </div>
         </div>
 
-        <?php if ($histoire['id_sit_finale'] == $situation['id_sit']){ ?>
+        <?php 
+        if ($histoire['id_sit_finale'] == $situation['id_sit']){ ?>
             <div class = "paragraph text-center">
                 <h3>Bravo, vous êtes arrivé au bout de l'histoire !</h3>
                 <p class="text-center">
@@ -87,19 +95,20 @@
                 <a class="btn btn-default btn-warning" href="index.php">Retourner à l'accueil</a>
             </div>
 
-        <?php 
-        // remet la situation en cours à la situation initiale pour pouvoir recommencer l'histoire
-        // ajoute une victoire et une fois jouee
+            <?php 
+            // remet la situation en cours à la situation initiale pour pouvoir recommencer l'histoire
+            // ajoute une victoire et une fois jouee
             $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsitinit, nb_victoires=nb_victoires+1, nb_fois_jouee=nb_fois_jouee+1 WHERE id_hist=:idhist AND id_profil=:idprofil");
             $req_maj_sit->execute(array("idsitinit"=>$histoire['id_sit_initiale'], "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
 
         }
         ?>
         <br>
-        <?php require_once "footer.php"?>
+        
 
     </body>
 
+    <?php require_once "footer.php"?>
 
 
 </html>
