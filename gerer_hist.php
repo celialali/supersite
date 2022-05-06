@@ -15,39 +15,34 @@
                 <?php foreach($histoires as $histoire){?>
                         <fieldset>
                         <?php echo $histoire['titre']?>
+                        <form action="modif.php" method="POST">
                             <button type="submit" name="editer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-edit"></span> Editer</button>
+                        </form >
                             <?php if($histoire['affichee']==1){?>
-                                <button type="submit" name="masquer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-lock"></span> Masquer</button>
-
+                            <form action="submit.php" method="POST">
+                                <button type="hidden" name="masquer" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-lock"></span> Masquer</button>
+                            </form>
                             <?php }
                                 else{?>
-                                    <button type="submit" name ="afficher" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-unlock"></span> Afficher</button>
-
+                                <form action="submit.php" method="POST">
+                                    <button type="hidden" name ="afficher" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-unlock"></span> Afficher</button>
+                                </form>
                             <?php } ?>
                         
-
-                            <button type="submit" name ="supprimer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-trash"></span> Supprimer</button><br/>
-                        
-                        <?php if(isset($_POST['editer'])){
+                        <form role="form" action="submit.php" method="POST">
+                            <button type="hidden" name ="supprimer" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-trash"></span> Supprimer</button><br/>
+                        </form>
+                     
+                       <?php } ?>
+                        <?php /*if(isset($_POST['editer'])){
                             header('modif.php');
-                        }
-                        if(isset($_POST['afficher'])){
-                            $histoire['affichee']==1;
-                        }
-                        if(isset($_POST['masquer'])){
-                            $histoire['affichee']==0;
-                        }
+                        }*/?>
 
-                        if(isset($_POST['supprimer'])){
-                            if($BDD){
-                                $req = "DELETE FROM histoire WHERE id_hist =:id";
-                                $prepare=$BDD ->prepare($req);
-                                $prepare -> execute(array("id"=>$histoire['id_hist']));
-                                }
-                         } 
-                        } ?>
+                        
+              
                         </fieldset>
                         </div>
+                        
             
         </div>
     </body>
