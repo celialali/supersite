@@ -17,8 +17,12 @@ if($BDD){
             "idhist"=>$id_hist, 
             "idprofil"=>$_SESSION['id_profil']
         ));
-        $targetLink = "hist.php?id_hist=".$id_hist."&id_sit=".$choix['id_sit_suivante'];
-        echo "hist.php?id_hist=".$id_hist."&id_sit=".$choix['id_sit_suivante'];
+        if ($choix['choix_mortel']==1){
+            $targetLink = "defaite.php?id_hist=".$id_hist;
+        }
+        else{
+            $targetLink = "hist.php?id_hist=".$id_hist."&id_sit=".$choix['id_sit_suivante'];
+        }
         header('Location: '.$targetLink);
     }
 }
