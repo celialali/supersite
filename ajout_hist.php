@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                         <p class="text-center">Choisissez une image représentative de votre histoire</p>
-                        <input type="file" name="userfile" id='userfile' class="form-control" required>
+                        <input type="file" name="image" id='userfile' class="form-control" required>
                         
                     </div>
                 </div>

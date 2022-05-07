@@ -34,9 +34,7 @@
                         </form>
                      
                        <?php } ?>
-                        <?php /*if(isset($_POST['editer'])){
-                            header('modif.php');
-                        }*/?>
+                        
 
                         
               
