@@ -11,7 +11,11 @@
                         $req = "INSERT INTO histoire (titre,description, image) VALUES (:ttre,:descr,:img)";
                         $prepare=$BDD ->prepare($req);
                         $prepare -> execute(array("ttre"=>$titre, "descr"=>$description, "img"=>$image));
+
+                        $req_id_hist = $BDD->prepare("SELECT * FROM histoire WHERE titre=:unTitre");
+                        $req_id_hist->execute(array("unTitre"=>$titre));
+                        $id = $req_id_hist->fetch()['id_hist'];
                 }
             }
-            header('Location: ajout_situations.php?titre='.$titre); 
+            header('Location: ajout_situations.php?&id_hist='.$id); 
             ?>

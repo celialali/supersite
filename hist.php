@@ -95,7 +95,7 @@
 
             <?php 
             // remet la situation en cours à la situation initiale pour pouvoir recommencer l'histoire
-            // ajoute une victoire et une fois jouee
+            // ajoute une victoire et une fois jouee, remet le nb de vies à 3 et l'état "en cours" à zero
             $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsitinit, nb_victoires=nb_victoires+1, nb_fois_jouee=nb_fois_jouee+1, nb_vies=3, en_cours=0 WHERE id_hist=:idhist AND id_profil=:idprofil");
             $req_maj_sit->execute(array("idsitinit"=>$histoire['id_sit_initiale'], "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
 
