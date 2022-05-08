@@ -4,18 +4,21 @@
 require "connect.php";
 require "head.php";
 if($BDD) {
-    // On sélectionne les histoires qui doivent être affichées
+    // On sélectionne les histoires qui ne sont pas masquées
     $req = "SELECT * FROM histoire WHERE affichee=1 ORDER BY titre";  
     $rep = $BDD->prepare($req);
     $rep->execute();
     $histoires = $rep->fetchAll();
 
     // On trouve les id des histoires qui sont en cours de lecture par l'utilisateur connecté
-    $histoires_en_cours = $BDD->prepare("SELECT * FROM lecture WHERE id_profil=:idprofil AND en_cours=1");
-    $histoires_en_cours-> execute(array(
-        "idprofil"=>$_SESSION['id_profil']
-    ));
-    $liste_hist_en_cours = $histoires_en_cours->fetchAll();
+    if (isset($_SESSION['login'])){
+        $histoires_en_cours = $BDD->prepare("SELECT * FROM lecture WHERE id_profil=:idprofil AND en_cours=1");
+        $histoires_en_cours-> execute(array(
+            "idprofil"=>$_SESSION['id_profil']
+        ));
+        $liste_hist_en_cours = $histoires_en_cours->fetchAll();
+    }
+    
 }?>
     
     
