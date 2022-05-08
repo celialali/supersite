@@ -85,6 +85,7 @@ if($BDD) {
 
             ?>
             <h3> Toutes les histoires </h3>
+            <hr>
             <br>
             <?php foreach ($histoires as $histoire) { ?>
                 <div class="ligne">

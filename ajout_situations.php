@@ -5,9 +5,9 @@
     require "header.php";?>
 
     <body>
-        <h2 class="text-center">Ajouter une histoire</h2>
+        <h2 class="text-center">Ajout des situations</h2>
         <div class="well">
-            <p>Entrez les situations présentes dans votre histoire une par une :</p>
+            <p>Entrez les <b>situations</b> présentes dans votre histoire une par une :</p>
             <fieldset>
                 <form class="form-signin form-horizontal" role="form" method="post"> 
                     <!-- pas d'action car on reste sur la meme page (en gardant ?id_hist=... dans l'url-->
@@ -39,8 +39,9 @@
                     ?>
         
         </div>
-        <p> Une fois que vous aurez rempli toutes vos situations, passez à l'ajout des choix en appuyant sur
+        <p> <h4>Une fois que vous aurez rempli toutes vos situations, passez à l'ajout des choix en appuyant sur
             <a href="ajout_choix.php?id_hist=<?=$id_hist?>" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-chevron-right"></span> Continuer</a>
+            </h4>
         </p>
         <br>
     </body>

@@ -19,7 +19,7 @@
     <body>
         <h2 class="text-center">Ajout des choix</h2>
         <div class="well">
-            <p>Entrez chaque choix de l'histoire :</p>
+            <p>Entrez chaque <b>choix</b> de l'histoire :</p>
             <br>
             <fieldset>
                 <form class="form-signin" role="form" method="post"> 
@@ -57,7 +57,8 @@
                     </div>
                     <br>
                     <div>
-                        Ce choix donne-il un bonus ou un malus de vie?
+                        <p>Ce choix donne-il un bonus ou un malus de vie?</p>
+                        
                         <div class="form-check form-check-inline" required>
                             <input required class="form-check-input" type="radio" name="vies" id="vies1" value="1">&ensp;
                             <label class="form-check-label" for="vies1">Bonus</label> &emsp;
@@ -80,8 +81,9 @@
             </fieldset>
 
         </div>
-        <p> Une fois que vous aurez rempli toutes vos situations, validez en appuyant sur
+        <p> <h4>Une fois que vous aurez rempli tous vos choix, validez en appuyant sur 
             <a href="ajout_choix.php?titre=<?=$titre?>" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-chevron-right"></span> Continuer</a>
+            </h4>
         </p>
         <br>
     </body>
