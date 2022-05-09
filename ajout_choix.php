@@ -99,14 +99,15 @@
         }
 
         if($BDD){
-            $req_ajout = "INSERT INTO choix (intitule,vie,id_sit_suivante,id_sit_precedente,choix_mortel) VALUES (:intit,:vie,:sit_suivante,:sit_precedente,:mortel)";
+            $req_ajout = "INSERT INTO choix (intitule,vie,id_sit_suivante,id_sit_precedente,choix_mortel,id_hist) VALUES (:intit,:vie,:sit_suivante,:sit_precedente,:mortel,:idhist)";
             $rep_ajout=$BDD ->prepare($req_ajout);
             $rep_ajout -> execute(array(
                 "intit"=>$_POST['choix'],
                 "sit_suivante"=> $_POST['sit_suivante'],
                 "sit_precedente"=> $_POST['sit_precedente'],
                 "vie"=> $vie,
-                "mortel"=> $mortel
+                "mortel"=> $mortel,
+                "idhist"=>$id_hist
             ));
         }
     }

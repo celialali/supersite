@@ -13,9 +13,9 @@
                 }?>
                 <div class="well">
                 <?php foreach($histoires as $histoire){?>
-                        <fieldset>
+                    <fieldset>
                         <?php echo $histoire['titre']?>
-                        <form action="edit.php" method="POST">
+                        <form action="edit.php?id_hist=<?=$histoire['id_hist']?>" method="POST">
                             <button type="submit" name="editer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-edit"></span> Editer</button>
                         </form >
                             <?php if($histoire['affichee']==1){?>
@@ -35,11 +35,8 @@
                      
                        <?php } ?>
                         
-
-                        
-              
-                        </fieldset>
-                        </div>
+                    </fieldset>
+                </div>
                         
             
         </div>

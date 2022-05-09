@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2022 at 08:21 PM
+-- Generation Time: May 09, 2022 at 09:49 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.4
 
@@ -23,6 +23,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `choix` (
   `id_choix` int(11) NOT NULL,
+  `id_hist` int(11) NOT NULL,
   `intitule` varchar(150) NOT NULL,
   `vie` int(11) NOT NULL,
   `id_sit_suivante` int(11) NOT NULL,
@@ -34,23 +35,31 @@ CREATE TABLE `choix` (
 -- Dumping data for table `choix`
 --
 
-INSERT INTO `choix` (`id_choix`, `intitule`, `vie`, `id_sit_suivante`, `id_sit_precedente`, `choix_mortel`) VALUES
-(1, 'Prendre mon vélo', 0, 2, 1, 0),
-(2, 'Y aller en courant', 0, 2, 1, 0),
-(3, 'Partir vers le grand arbre', -1, 3, 2, 0),
-(4, 'Partir vers le petit ruisseau', -1, 4, 2, 0),
-(5, 'Partir vers l\'entrée du parc', 1, 6, 2, 0),
-(6, 'Retourner vers le banc vert', 0, 5, 3, 0),
-(7, 'Passer par le petit talus', 0, 5, 4, 0),
-(8, 'Retourner à la maison', 0, 7, 5, 0),
-(9, 'Chercher encore un peu dans le parc', 0, 2, 5, 0),
-(10, 'Retourner vers le banc vert', 0, 5, 6, 0),
-(11, 'Suivre la dame', 1, 9, 7, 0),
-(12, 'Retourner jouer à la GameBoy à la maison', -1, 0, 7, 1),
-(13, 'Mon lacet est défait', -1, 10, 9, 0),
-(14, 'Dire à Fabien de partir devant', 0, 10, 9, 0),
-(15, 'Nous suivons la dame du regard', 1, 11, 9, 0),
-(16, 'Nous retournons sur nos pas', 0, 9, 10, 0);
+INSERT INTO `choix` (`id_choix`, `id_hist`, `intitule`, `vie`, `id_sit_suivante`, `id_sit_precedente`, `choix_mortel`) VALUES
+(1, 1, 'Prendre mon vélo', 0, 2, 1, 0),
+(2, 1, 'Y aller en courant', 0, 2, 1, 0),
+(3, 1, 'Partir vers le grand arbre', -1, 3, 2, 0),
+(4, 1, 'Partir vers le petit ruisseau', -1, 4, 2, 0),
+(5, 1, 'Partir vers l\'entrée du parc', 1, 6, 2, 0),
+(6, 1, 'Retourner vers le banc vert', 0, 5, 3, 0),
+(7, 1, 'Passer par le petit talus', 0, 5, 4, 0),
+(8, 1, 'Retourner à la maison', 0, 7, 5, 0),
+(9, 1, 'Chercher encore un peu dans le parc', 0, 2, 5, 0),
+(10, 1, 'Retourner vers le banc vert', 0, 5, 6, 0),
+(11, 1, 'Suivre la dame', 1, 9, 7, 0),
+(12, 1, 'Retourner jouer à la GameBoy à la maison', -1, 0, 7, 1),
+(13, 1, 'Mon lacet est défait', -1, 10, 9, 0),
+(14, 1, 'Dire à Fabien de partir devant', 0, 10, 9, 0),
+(15, 1, 'Nous suivons la dame du regard', 1, 11, 9, 0),
+(16, 1, 'Nous retournons sur nos pas', 0, 9, 10, 0),
+(31, 24, 'Je passe a la situation suivante', 0, 110, 111, 0),
+(32, 24, 'Ou je vais directement à la fin', 0, 113, 111, 0),
+(33, 24, 'Je vais à la fin', 0, 113, 110, 0),
+(34, 24, 'Je retourne en arrière', 0, 111, 110, 0),
+(35, 26, 'aller a la 2', -1, 117, 116, 0),
+(36, 26, 'aller a la fin', 1, 118, 116, 0),
+(37, 26, 'revenir a la 1', 0, 116, 117, 0),
+(38, 26, 'aller a la fin', 0, 118, 117, 0);
 
 -- --------------------------------------------------------
 
@@ -74,7 +83,9 @@ CREATE TABLE `histoire` (
 
 INSERT INTO `histoire` (`id_hist`, `titre`, `image`, `description`, `affichee`, `id_sit_initiale`, `id_sit_finale`) VALUES
 (1, 'Monsieur Charles', 'monsieurcharles.png', 'Tous les lundis après l\'école, monsieur Charles nous raconte une histoire. Mais aujourd\'hui, j\'ai l\'impression que la situation est différente...', 1, 1, 11),
-(2, 'La deuxième super histoire', 'monstrechat.png', 'Cette histoire de folie vous emmènera dans les tréfonds de l\'ENSC ainsi qu\'à la découverte, entre autres, du monstre sous le patio.', 1, 14, 14);
+(2, 'La deuxième super histoire', 'monstrechat.png', 'Cette histoire de folie vous emmènera dans les tréfonds de l\'ENSC ainsi qu\'à la découverte, entre autres, du monstre sous le patio.', 1, 14, 14),
+(24, 'fffffffff', 'fleur.png', 'zzzzzzzzzz', 1, 111, 113),
+(26, 'aaaaaaaaaa', 'requeteterrains.png', 'zzzzzzzzz', 1, 116, 118);
 
 -- --------------------------------------------------------
 
@@ -99,8 +110,11 @@ CREATE TABLE `lecture` (
 --
 
 INSERT INTO `lecture` (`id_lecture`, `id_hist`, `id_profil`, `nb_vies`, `nb_fois_jouee`, `nb_morts`, `nb_victoires`, `id_sit_en_cours`, `en_cours`) VALUES
-(24, 2, 5, 3, 4, 0, 4, 14, 0),
-(25, 1, 5, 3, 7, 4, 3, 2, 1);
+(24, 2, 5, 3, 7, 0, 7, 14, 0),
+(25, 1, 5, 3, 8, 4, 4, 1, 0),
+(26, 3, 5, 3, 2, 0, 2, 0, 0),
+(27, 24, 5, 3, 3, 0, 3, 111, 0),
+(28, 26, 5, 3, 3, 0, 3, 116, 0);
 
 -- --------------------------------------------------------
 
@@ -153,7 +167,13 @@ INSERT INTO `situation` (`id_sit`, `paragraphe`, `id_hist`) VALUES
 (9, 'Nous suivons la dame. Lucie avait un peu peur, mais je l’ai encouragée : nous devons savoir ce qui est arrivé à monsieur Charles. Nous courons jusqu’à la grille.', 1),
 (10, 'Nous avons perdu la trace de la dame. Nous retournons sur nos pas.\r\n', 1),
 (11, 'Nous voyons la dame entrer dans un immeuble. Nous la suivons et voyons au loin un Monsieur en rouge. Nous appelons « Monsieur Charles, monsieur Charles !!! ». Monsieur Charles nous attend tranquillement sur le palier. Il nous dit bonjour et nous demande ce que nous faisons ici. Nous lui racontons alors notre histoire de détectives. Mais voilà que monsieur Charles se met à rire : « Mais Rose est mon aide-ménagère ! Quand je suis malade, je prête mon panier pour qu’elle aille faire mes courses. Nous avons tous bien rigolé et nous avons eu droit à une très belle histoire comme tous les lundis soirs. ', 1),
-(14, 'Lol c\'est déjà terminé', 2);
+(14, 'Lol c\'est déjà terminé', 2),
+(110, 'hophophop     zzz raaaaaaaaa', 24),
+(111, 'hophophop       ', 24),
+(113, 'teeeeerminé       ', 24),
+(116, 'premiere sit', 26),
+(117, 'deuxieme sit', 26),
+(118, 'ultime sit', 26);
 
 --
 -- Indexes for dumped tables
@@ -197,19 +217,19 @@ ALTER TABLE `situation`
 -- AUTO_INCREMENT for table `choix`
 --
 ALTER TABLE `choix`
-  MODIFY `id_choix` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_choix` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `histoire`
 --
 ALTER TABLE `histoire`
-  MODIFY `id_hist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_hist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `lecture`
 --
 ALTER TABLE `lecture`
-  MODIFY `id_lecture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_lecture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `profil`
@@ -221,5 +241,5 @@ ALTER TABLE `profil`
 -- AUTO_INCREMENT for table `situation`
 --
 ALTER TABLE `situation`
-  MODIFY `id_sit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_sit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 COMMIT;
