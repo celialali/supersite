@@ -33,7 +33,6 @@
                             <span class="glyphicon glyphicon-user"></span> Bienvenue, <?= $_SESSION['login'] ?> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="account.php">Mon compte</a></li>
                             <li><a href="logout.php">Se déconnecter</a></li>
                         </ul>
                     </li>

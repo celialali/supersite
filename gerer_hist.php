@@ -15,7 +15,7 @@
                 <?php foreach($histoires as $histoire){?>
                         <fieldset>
                         <?php echo $histoire['titre']?>
-                        <form action="modif.php" method="POST">
+                        <form action="edit.php" method="POST">
                             <button type="submit" name="editer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-edit"></span> Editer</button>
                         </form >
                             <?php if($histoire['affichee']==1){?>

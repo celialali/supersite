@@ -34,6 +34,8 @@
                         <button type="submit" class="btn btn-default btn-secondary">Enregistrer</button>
                     </div>
                 </div>
+                <?php /*$uploaddir='img';
+                $uploadfile=$uploaddir.basename($_FILES['userfile']['image']);*/?>
             </form>
             
         </div>
