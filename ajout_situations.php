@@ -46,16 +46,30 @@
                 $req = "INSERT INTO situation (paragraphe,id_hist) VALUES (:par,:id)";
                 $prepare=$BDD ->prepare($req);
                 $prepare -> execute(array("par"=>$_POST['situation'],"id"=>$id_hist));
-                            
-                // if (isset($_POST['sit_initiale'])){
-                //     $req_sit_init = $BDD->prepare("UPDATE histoire SET id_sit_initiale=:sit_init WHERE id_hist=:idhist");
-                //     $req_sit_init->execute(array(
-                //         "sit_init"=>,  //faire une requete pour recuperer l'id de la situation qui vient d'etre creee
-                //         "idhist"=>$id_hist
-                //     ));
-                // }
 
-                //faire pareil pour la situation finale
+                //on récupère l'id de la situation qu'on vient de rajouter
+                $req_id_nouvelle_sit = $BDD->prepare("SELECT * FROM situation WHERE paragraphe=:par AND id_hist=:idhist");
+                $req_id_nouvelle_sit->execute(array(
+                    "par"=>$_POST['situation'],
+                    "idhist"=>$id_hist
+                ));
+                $id_nvelle_sit = $req_id_nouvelle_sit->fetch()['id_sit'];
+                            
+                if (isset($_POST['sit_initiale'])){ //on écrit dans l'histoire l'id de la situation initiale
+                    $req_sit_init = $BDD->prepare("UPDATE histoire SET id_sit_initiale=:sit_init WHERE id_hist=:idhist");
+                    $req_sit_init->execute(array(
+                        "sit_init"=>$id_nvelle_sit,
+                        "idhist"=>$id_hist
+                    ));
+                }
+
+                if (isset($_POST['sit_finale'])){ //on écrit dans l'histoire l'id de la situation finale
+                    $req_sit_finale = $BDD->prepare("UPDATE histoire SET id_sit_finale=:sit_finale WHERE id_hist=:idhist");
+                    $req_sit_finale->execute(array(
+                        "sit_finale"=>$id_nvelle_sit,
+                        "idhist"=>$id_hist
+                    ));
+                }
             }
         }
                     ?>
