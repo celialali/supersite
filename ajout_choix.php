@@ -82,7 +82,7 @@
 
         </div>
         <p> <h4>Une fois que vous aurez rempli tous vos choix, validez en appuyant sur 
-            <a href="ajout_choix.php?titre=<?=$titre?>" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-chevron-right"></span> Continuer</a>
+            <a href="index.php" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-chevron-right"></span> Continuer</a>
             </h4>
         </p>
         <br>
