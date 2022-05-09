@@ -20,12 +20,12 @@
                         </form >
                             <?php if($histoire['affichee']==1){?>
                             <form action="submit.php" method="POST">
-                                <button type="hidden" name="masquer" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-lock"></span> Masquer</button>
+                                <button type="hidden" name="masquer" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-eye-close"></span> Masquer</button>
                             </form>
                             <?php }
                                 else{?>
                                 <form action="submit.php" method="POST">
-                                    <button type="hidden" name ="afficher" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-unlock"></span> Afficher</button>
+                                    <button type="hidden" name ="afficher" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-eye-open"></span> Afficher</button>
                                 </form>
                             <?php } ?>
                         

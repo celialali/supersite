@@ -22,20 +22,17 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                        <p class="text-center">Choisissez une image représentative de votre histoire</p>
-                        <input type="file" name="image" id='userfile' class="form-control" required>
-                        
-                    </div>
+                <label class="col-sm-4 control-label">Choisissez une image qui représente votre histoire</label>
+                <div class="col-sm-4">
+                  <input type="file" name="image"/>
                 </div>
+              </div>
 
                 <div class="form-group">
                     <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                         <button type="submit" class="btn btn-default btn-secondary">Enregistrer</button>
                     </div>
                 </div>
-                <?php /*$uploaddir='img';
-                $uploadfile=$uploaddir.basename($_FILES['userfile']['image']);*/?>
             </form>
             
         </div>
