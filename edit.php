@@ -49,6 +49,8 @@ if ($BDD){
         <form method="post" class="form" action="traitement_modif_sit&hist.php?id_hist=<?=$id_hist?>">
             <?php foreach ($situations as $situation){?>
                 <textarea required name="<?=$situation['id_sit']?>" rows="3" cols="40"><?php echo $situation['paragraphe'];?></textarea>
+                <!--<button type="hidden" name ="supprimer" class="btn btn-default btn-secondary" value="<?php echo $situations['id_sit']?>"><span class="glyphicon glyphicon-trash"></span> Supprimer la situation</button>
+            A mettre en forme et autre formulaire ?-->
             <?php }
             ?>
             <br/>

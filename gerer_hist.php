@@ -48,7 +48,7 @@
                                     $nbjouee=$stat['nb_fois_jouee'];
                                     $nbvictoires=$stat['nb_victoires'];
                                     $nbdefaites=$stat['nb_morts'];
-                                    $pourcentagereussite=($nbvictoires/$nbjouee)*100;?>
+                                    $pourcentagereussite=round(($nbvictoires/$nbjouee)*100,0);?>
 
                                     
                                     Nombre de fois que l'histoire a été jouée : <?php echo $nbjouee;?><br/>
