@@ -12,30 +12,41 @@
                     $histoires = $reponse->fetchAll();
                 }?>
                 <div class="well">
+                <table class="gerer">
                 <?php foreach($histoires as $histoire){?>
                     <fieldset>
-                        <?php echo $histoire['titre']?>
-                        <form action="edit.php?id_hist=<?=$histoire['id_hist']?>" method="POST">
-                            <button type="submit" name="editer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-edit"></span> Editer</button>
-                        </form >
-                            <?php if($histoire['affichee']==1){?>
-                            <form action="submit.php" method="POST">
-                                <button type="hidden" name="masquer" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-eye-close"></span> Masquer</button>
-                            </form>
-                            <?php }
-                                else{?>
-                                <form action="submit.php" method="POST">
-                                    <button type="hidden" name ="afficher" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-eye-open"></span> Afficher</button>
-                                </form>
-                            <?php } ?>
+                       
+                            <td>
+                                <tr><?php echo $histoire['titre']?></tr>
+                                <tr>
+                                    <form class="form-inline" action="edit.php?id_hist=<?=$histoire['id_hist']?>" method="POST">
+                                        <button type="submit" name="editer" class="btn btn-default btn-secondary"><span class="glyphicon glyphicon-edit"></span> Editer</button>
+                                    </form >
+                                </tr>
+                                <tr>
+                                    <?php if($histoire['affichee']==1){?>
+                                    <form class="form-inline" action="submit.php" method="POST">
+                                        <button type="hidden" name="masquer" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-eye-close"></span> Masquer</button>
+                                    </form>
+                                    <?php }
+                                        else{?>
+                                        <form class="form-inline" action="submit.php" method="POST">
+                                            <button type="hidden" name ="afficher" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-eye-open"></span> Afficher</button>
+                                        </form>
+                                    <?php } ?>
+                                </tr>
+                                <tr>
+                                    <form class="form-inline" role="form" action="submit.php" method="POST">
+                                        <button type="hidden" name ="supprimer" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-trash"></span> Supprimer</button><br/>
+                                    </form>
+                                </tr><br/>
                         
-                        <form role="form" action="submit.php" method="POST">
-                            <button type="hidden" name ="supprimer" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-trash"></span> Supprimer</button><br/>
-                        </form>
-                     
                        <?php } ?>
+                       </td>
+                        
                         
                     </fieldset>
+                    </table>
                 </div>
                         
             

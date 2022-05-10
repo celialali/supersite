@@ -46,6 +46,14 @@ if(isset($_POST['supprimer'])){
         $hist = $BDD->prepare($req2);
         $hist -> execute(array(
             'id'=>$id_hist));
+
+        $req_sit="DELETE FROM situation WHERE id_hist=:id";
+        $sit=$BDD->prepare($req_sit);
+        $sit->execute(array('id'=>$id_hist));
+
+        $req_choix = "DELETE FROM choix WHERE id_hist=:id";
+        $choix = $BDD->prepare($req_choix);
+        $choix->execute(array('id'=>$id_hist));
     }
     header("Location: gerer_hist.php");
 }

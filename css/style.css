@@ -67,4 +67,8 @@ table{
     display:flex;
 }
 
+.gerer{
+    column-width:6rem;
+}
+
 
