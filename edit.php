@@ -29,9 +29,16 @@ if ($BDD){
     <h1 class="text-center">Editer votre histoire</h1>
     <h3> Editer les infos de l'histoire</h3>
     <div class="well">
-        <form method="post" class="form" action="">
+        <form method="post" class="form" action="traitement_modif_sit&hist.php?id_hist=<?=$id_hist?>">
             <p> Titre de l'histoire</p>
-            <input type="text" name="choix" class="form-control" size="50" required value="<?=$histoire['titre']?>"></input>
+            <input required type="text" name="titre" class="form-control" size="50" value="<?=$histoire['titre']?>"></input>
+            <br>
+            <p> Description de l'histoire</p>
+            <textarea required name="resume" class="form-control" rows="3" cols="40"><?php echo $histoire['description']?></textarea>
+            <br>
+            <div class="text-center"> 
+                <button type="submit" class="btn btn-secondary btn-default">Enregistrer</button>
+            </div>
         </form>
     </div>
 
@@ -39,7 +46,7 @@ if ($BDD){
     <div class="well">
         
         <br>
-        <form method="post" class="form" action="traitement_modif_sit.php?id_hist=<?=$id_hist?>">
+        <form method="post" class="form" action="traitement_modif_sit&hist.php?id_hist=<?=$id_hist?>">
             <?php foreach ($situations as $situation){?>
                 <textarea required name="<?=$situation['id_sit']?>" rows="3" cols="40"><?php echo $situation['paragraphe'];?></textarea>
             <?php }
@@ -97,32 +104,32 @@ if ($BDD){
                         <p>Ce choix donne-il un bonus ou un malus de vie?</p>
                         
                         <div class="form-check form-check-inline" required>
-                            <input required class="form-check-input" type="radio" name="vies" id="vies1" value="1"
+                            <input required class="form-check-input" type="radio" name="vies" id="vies1_<?=$unChoix['id_choix']?>" value="1"
                             <?php if ($unChoix['vie']==1){
                                 ?> checked <?php
                             }?>          
                             >&ensp;
-                            <label class="form-check-label" for="vies1">Bonus</label> &emsp;
+                            <label class="form-check-label" for="vies1_<?=$unChoix['id_choix']?>">Bonus</label> &emsp;
 
-                            <input required class="form-check-input" type="radio" name="vies" id="vies2" value="0" 
+                            <input required class="form-check-input" type="radio" name="vies" id="vies2_<?=$unChoix['id_choix']?>" value="0" 
                             <?php if ($unChoix['vie']==0){
                                 ?> checked <?php
                             }?>
                             >&ensp;
-                            <label class="form-check-label" for="vies2">Neutre</label> &emsp;
+                            <label class="form-check-label" for="vies2_<?=$unChoix['id_choix']?>">Neutre</label> &emsp;
 
-                            <input required class="form-check-input" type="radio" name="vies" id="vies3" value="-1"
+                            <input required class="form-check-input" type="radio" name="vies" id="vies3_<?=$unChoix['id_choix']?>" value="-1"
                             <?php if ($unChoix['vie']==-1){
                                 ?> checked <?php
                             }?>          
                             >&ensp;
-                            <label class="form-check-label" for="vies3">Malus</label> &emsp;
-                            <input required class="form-check-input" type="radio" name="vies" id="vies4" value="mortel"
+                            <label class="form-check-label" for="vies3_<?=$unChoix['id_choix']?>">Malus</label> &emsp;
+                            <input required class="form-check-input" type="radio" name="vies" id="vies4_<?=$unChoix['id_choix']?>" value="mortel"
                             <?php if ($unChoix['choix_mortel']==1){
                                 ?> checked <?php
                             }?>          
                             >&ensp;
-                            <label class="form-check-label" for="vies4">Choix mortel (défaite automatique)</label> 
+                            <label class="form-check-label" for="vies4_<?=$unChoix['id_choix']?>">Choix mortel (défaite automatique)</label> 
                         </div>
                     </div>  
                     <br>
