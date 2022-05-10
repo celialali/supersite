@@ -39,6 +39,24 @@
                                     <form class="form-inline" role="form" action="submit.php" method="POST">
                                         <button type="hidden" name ="supprimer" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-trash"></span> Supprimer</button><br/>
                                     </form>
+                                </tr>
+                                <tr>
+                                    <?php $req_stat = "SELECT * FROM lecture WHERE id_hist=:unIDhist";
+                                    $rep_stat = $BDD->prepare($req_stat);
+                                    $rep_stat->execute(array("unIDhist"=>$histoire['id_hist']));
+                                    $stat = $rep_stat->fetch();
+                                    $nbjouee=$stat['nb_fois_jouee'];
+                                    $nbvictoires=$stat['nb_victoires'];
+                                    $nbdefaites=$stat['nb_morts'];
+                                    $pourcentagereussite=($nbvictoires/$nbjouee)*100;?>
+
+                                    
+                                    Nombre de fois que l'histoire a été jouée : <?php echo $nbjouee;?><br/>
+                                    Nombre de victoires : <?php echo $nbvictoires;?><br/>
+                                    Nombre de défaites : <?php echo $nbdefaites;?><br/>
+                                    Pourcentage de réussite : <?php echo $pourcentagereussite?>%<br/>
+                                    
+
                                 </tr><br/>
                         
                        <?php } ?>
