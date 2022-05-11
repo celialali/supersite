@@ -38,22 +38,26 @@ if(isset($_POST['supprimer'])){
     $id_hist=$_POST["supprimer"];
                                 
     if($BDD){
-        $req_hist = "SELECT * FROM histoire WHERE id_hist=:unIDhist";
-        $rep_hist = $BDD->prepare($req_hist);
-        $rep_hist->execute(array("unIDhist"=>$id_hist));
-        $histoire = $rep_hist->fetch();
+        // $req_hist = "SELECT * FROM histoire WHERE id_hist=:unIDhist";
+        // $rep_hist = $BDD->prepare($req_hist);
+        // $rep_hist->execute(array("unIDhist"=>$id_hist));
+        // $histoire = $rep_hist->fetch();
+
         $req2 = "DELETE FROM histoire WHERE id_hist=:id";
-        $hist = $BDD->prepare($req2);
-        $hist -> execute(array(
+        $supp_hist = $BDD->prepare($req2);
+        $supp_hist -> execute(array(
             'id'=>$id_hist));
 
         $req_sit="DELETE FROM situation WHERE id_hist=:id";
-        $sit=$BDD->prepare($req_sit);
-        $sit->execute(array('id'=>$id_hist));
+        $supp_sit=$BDD->prepare($req_sit);
+        $supp_sit->execute(array('id'=>$id_hist));
 
         $req_choix = "DELETE FROM choix WHERE id_hist=:id";
-        $choix = $BDD->prepare($req_choix);
-        $choix->execute(array('id'=>$id_hist));
+        $supp_choix = $BDD->prepare($req_choix);
+        $supp_choix->execute(array('id'=>$id_hist));
+
+        $supp_lectures = $BDD->prepare("DELETE from lecture WHERE id_hist=:id");
+        $supp_lectures->execute(array('id'=>$id_hist));
     }
     header("Location: gerer_hist.php");
 }

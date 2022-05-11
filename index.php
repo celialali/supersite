@@ -39,11 +39,10 @@ if($BDD) {
             <hr/>
             
             <?php if (isset($_SESSION['login'])){
-                ?> <h3> Histoires en cours </h3>
-                <hr>
-                <?php 
                 // s'il y a au moins une histoire en cours, on les affiche
                 if ($histoires_en_cours->rowCount() >0){
+                    ?><h3> Histoires en cours </h3>
+                    <hr><?php
                     foreach ($liste_hist_en_cours as $hist_en_cours){
                         $id = $hist_en_cours['id_hist'];
                         // on cherche l'histoire correspondant à l'id
