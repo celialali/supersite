@@ -89,7 +89,7 @@ if($BDD) {
             <br>
             <?php foreach ($histoires as $histoire) { ?>
                 <div class="ligne">
-                    <div class="col1" ><img class="img-responsive" src="img/<?= $histoire['image'] ?>" title="<?= $histoire['titre'] ?>" width ="200"/>
+                    <div class="col1" ><img class="img-responsive" src="img/<?= $histoire['image'] ?>" title="<?= $histoire['titre']?>" alt="Histoire '<?= $histoire['titre']?>'" width ="200"/>
                     </div>
                 
                     <div class="col2" > 
