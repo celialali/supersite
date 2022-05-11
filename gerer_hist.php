@@ -25,18 +25,18 @@
                                 </tr>
                                 <tr>
                                     <?php if($histoire['affichee']==1){?>
-                                    <form class="form-inline" action="submit.php" method="POST">
+                                    <form action="submit.php" method="POST">
                                         <button type="hidden" name="masquer" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-eye-close"></span> Masquer</button>
                                     </form>
                                     <?php }
                                         else{?>
-                                        <form class="form-inline" action="submit.php" method="POST">
+                                        <form action="submit.php" method="POST">
                                             <button type="hidden" name ="afficher" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-eye-open"></span> Afficher</button>
                                         </form>
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                    <form class="form-inline" role="form" action="submit.php" method="POST">
+                                    <form role="form" action="submit.php" method="POST">
                                         <button type="hidden" name ="supprimer" class="btn btn-default btn-secondary" value="<?php echo $histoire['id_hist']?>"><span class="glyphicon glyphicon-trash"></span> Supprimer</button><br/>
                                     </form>
                                 </tr>
@@ -44,16 +44,20 @@
                                     <?php $req_stat = "SELECT * FROM lecture WHERE id_hist=:unIDhist";
                                     $rep_stat = $BDD->prepare($req_stat);
                                     $rep_stat->execute(array("unIDhist"=>$histoire['id_hist']));
-                                    $stat = $rep_stat->fetch();
-                                    $nbjouee=$stat['nb_fois_jouee'];
-                                    $nbvictoires=$stat['nb_victoires'];
-                                    $nbdefaites=$stat['nb_morts'];
+                                    $stats = $rep_stat->fetchall();
+                                    $nbjouee=0;
+                                    $nbvictoires=0;
+                                    $nbdefaites=0;
+                                    foreach ($stats as $stat){
+                                        $nbjouee = $nbjouee + $stat['nb_fois_jouee'] ;
+                                        $nbvictoires=$nbvictoires + $stat['nb_victoires'];
+                                        $nbdefaites=$nbdefaites + $stat['nb_morts'];
+                                    }
                                     if($nbjouee!=0){
                                         $pourcentagereussite=round(($nbvictoires/$nbjouee)*100,0);
                                     }
                                     ?>
                                     <br/>
-                                    
                                     
                                     <?php if($nbjouee!=0){?>
                                     Nombre de fois que l'histoire a été jouée : <?php echo $nbjouee;?><br/>
