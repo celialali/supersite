@@ -84,8 +84,15 @@
 
         <?php 
         if ($histoire['id_sit_finale'] == $situation['id_sit']){ ?>
+            <?php // on récupère la liste des choix effectués au long de l'histoire
+            $req_recup_choix = $BDD->prepare("SELECT * FROM lecture WHERE id_hist=:idhist AND id_profil=:idprofil");
+            $req_recup_choix->execute(array("idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
+            $tous_les_choix = $req_recup_choix->fetch()['liste_choix'];
+            ?>
             <div class = "paragraph text-center">
                 <h3>Bravo, vous êtes arrivé au bout de l'histoire !</h3>
+                <p> Voici le récapitulatif des choix que vous avez effectué:</p>
+                <p> <?=$tous_les_choix?></p>
                 <p class="text-center">
                     <img class="responsive-image" src="img/welldone.gif" width="170"/>
                 </p>
@@ -94,10 +101,14 @@
             </div>
 
             <?php 
+            
             // remet la situation en cours à la situation initiale pour pouvoir recommencer l'histoire
             // ajoute une victoire et une fois jouee, remet le nb de vies à 3 et l'état "en cours" à zero
             $req_maj_sit = $BDD->prepare("UPDATE lecture SET id_sit_en_cours=:idsitinit, nb_victoires=nb_victoires+1, nb_fois_jouee=nb_fois_jouee+1, nb_vies=3, en_cours=0 WHERE id_hist=:idhist AND id_profil=:idprofil");
             $req_maj_sit->execute(array("idsitinit"=>$histoire['id_sit_initiale'], "idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
+            // on remet la liste des choix à zéro
+            $req_suppr_choix = $BDD->prepare("UPDATE lecture SET liste_choix='' WHERE id_hist=:idhist AND id_profil=:idprofil");
+            $req_suppr_choix->execute(array("idhist"=>$id_hist, "idprofil"=>$_SESSION['id_profil']));
 
         }
 
