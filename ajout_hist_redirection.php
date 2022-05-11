@@ -22,9 +22,8 @@
                         // upload image
                         $image = basename($_FILES['image']['name']);
                         $uploadedFile = "img/$image";
-                        echo $uploadedFile;
                         move_uploaded_file($_FILES['image']['tmp_name'], $uploadedFile);
                     }
             }
-            //header('Location: ajout_situations.php?&id_hist='.$id); 
+            header('Location: ajout_situations.php?&id_hist='.$id); 
             ?>
