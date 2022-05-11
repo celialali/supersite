@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2022 at 09:49 PM
+-- Generation Time: May 11, 2022 at 10:13 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.4
 
@@ -51,15 +51,7 @@ INSERT INTO `choix` (`id_choix`, `id_hist`, `intitule`, `vie`, `id_sit_suivante`
 (13, 1, 'Mon lacet est défait', -1, 10, 9, 0),
 (14, 1, 'Dire à Fabien de partir devant', 0, 10, 9, 0),
 (15, 1, 'Nous suivons la dame du regard', 1, 11, 9, 0),
-(16, 1, 'Nous retournons sur nos pas', 0, 9, 10, 0),
-(31, 24, 'Je passe a la situation suivante', 0, 110, 111, 0),
-(32, 24, 'Ou je vais directement à la fin', 0, 113, 111, 0),
-(33, 24, 'Je vais à la fin', 0, 113, 110, 0),
-(34, 24, 'Je retourne en arrière', 0, 111, 110, 0),
-(35, 26, 'aller a la 2', -1, 117, 116, 0),
-(36, 26, 'aller a la fin', 1, 118, 116, 0),
-(37, 26, 'revenir a la 1', 0, 116, 117, 0),
-(38, 26, 'aller a la fin', 0, 118, 117, 0);
+(16, 1, 'Nous retournons sur nos pas', 0, 9, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -72,7 +64,7 @@ CREATE TABLE `histoire` (
   `titre` varchar(50) NOT NULL,
   `image` varchar(20) NOT NULL,
   `description` varchar(700) NOT NULL,
-  `affichee` tinyint(1) NOT NULL DEFAULT 1,
+  `affichee` int(1) NOT NULL DEFAULT 1,
   `id_sit_initiale` int(11) NOT NULL,
   `id_sit_finale` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -82,10 +74,8 @@ CREATE TABLE `histoire` (
 --
 
 INSERT INTO `histoire` (`id_hist`, `titre`, `image`, `description`, `affichee`, `id_sit_initiale`, `id_sit_finale`) VALUES
-(1, 'Monsieur Charles', 'monsieurcharles.png', 'Tous les lundis après l\'école, monsieur Charles nous raconte une histoire. Mais aujourd\'hui, j\'ai l\'impression que la situation est différente...', 1, 1, 11),
-(2, 'La deuxième super histoire', 'monstrechat.png', 'Cette histoire de folie vous emmènera dans les tréfonds de l\'ENSC ainsi qu\'à la découverte, entre autres, du monstre sous le patio.', 1, 14, 14),
-(24, 'fffffffff', 'fleur.png', 'zzzzzzzzzz', 1, 111, 113),
-(26, 'aaaaaaaaaa', 'requeteterrains.png', 'zzzzzzzzz', 1, 116, 118);
+(1, 'Monsieur Charles', 'monsieurcharles.png', 'Tous les lundis, nous rejoignons Monsieur Charles au parc pour qu\'il nous raconte une histoire. Mais aujourd\'hui, je sens qu\'il y a quelque chose de bizarre...', 1, 1, 11),
+(2, 'Le monstre de l\'ENSC', 'monstrechat.png', 'Dans cette histoire, vous pourrez découvrir tous les mystères de l\'ENSC (notamment le monstre caché sous le patio...)', 1, 14, 14);
 
 -- --------------------------------------------------------
 
@@ -102,19 +92,19 @@ CREATE TABLE `lecture` (
   `nb_morts` int(11) NOT NULL DEFAULT 0,
   `nb_victoires` int(11) NOT NULL DEFAULT 0,
   `id_sit_en_cours` int(11) NOT NULL,
-  `en_cours` tinyint(4) NOT NULL DEFAULT 0
+  `en_cours` tinyint(4) NOT NULL DEFAULT 0,
+  `liste_choix` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `lecture`
 --
 
-INSERT INTO `lecture` (`id_lecture`, `id_hist`, `id_profil`, `nb_vies`, `nb_fois_jouee`, `nb_morts`, `nb_victoires`, `id_sit_en_cours`, `en_cours`) VALUES
-(24, 2, 5, 3, 7, 0, 7, 14, 0),
-(25, 1, 5, 3, 8, 4, 4, 1, 0),
-(26, 3, 5, 3, 2, 0, 2, 0, 0),
-(27, 24, 5, 3, 3, 0, 3, 111, 0),
-(28, 26, 5, 3, 3, 0, 3, 116, 0);
+INSERT INTO `lecture` (`id_lecture`, `id_hist`, `id_profil`, `nb_vies`, `nb_fois_jouee`, `nb_morts`, `nb_victoires`, `id_sit_en_cours`, `en_cours`, `liste_choix`) VALUES
+(24, 2, 5, 3, 8, 0, 8, 14, 0, ''),
+(25, 1, 5, 3, 10, 4, 6, 2, 1, ''),
+(29, 1, 16, 3, 2, 1, 1, 1, 0, ''),
+(30, 2, 16, 3, 1, 0, 1, 14, 0, '');
 
 -- --------------------------------------------------------
 
@@ -167,13 +157,7 @@ INSERT INTO `situation` (`id_sit`, `paragraphe`, `id_hist`) VALUES
 (9, 'Nous suivons la dame. Lucie avait un peu peur, mais je l’ai encouragée : nous devons savoir ce qui est arrivé à monsieur Charles. Nous courons jusqu’à la grille.', 1),
 (10, 'Nous avons perdu la trace de la dame. Nous retournons sur nos pas.\r\n', 1),
 (11, 'Nous voyons la dame entrer dans un immeuble. Nous la suivons et voyons au loin un Monsieur en rouge. Nous appelons « Monsieur Charles, monsieur Charles !!! ». Monsieur Charles nous attend tranquillement sur le palier. Il nous dit bonjour et nous demande ce que nous faisons ici. Nous lui racontons alors notre histoire de détectives. Mais voilà que monsieur Charles se met à rire : « Mais Rose est mon aide-ménagère ! Quand je suis malade, je prête mon panier pour qu’elle aille faire mes courses. Nous avons tous bien rigolé et nous avons eu droit à une très belle histoire comme tous les lundis soirs. ', 1),
-(14, 'Lol c\'est déjà terminé', 2),
-(110, 'hophophop     zzz raaaaaaaaa', 24),
-(111, 'hophophop       ', 24),
-(113, 'teeeeerminé       ', 24),
-(116, 'premiere sit', 26),
-(117, 'deuxieme sit', 26),
-(118, 'ultime sit', 26);
+(14, 'Lol c\'est déjà terminé', 2);
 
 --
 -- Indexes for dumped tables
@@ -223,13 +207,13 @@ ALTER TABLE `choix`
 -- AUTO_INCREMENT for table `histoire`
 --
 ALTER TABLE `histoire`
-  MODIFY `id_hist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_hist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `lecture`
 --
 ALTER TABLE `lecture`
-  MODIFY `id_lecture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_lecture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `profil`
