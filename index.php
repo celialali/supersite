@@ -22,7 +22,7 @@ if($BDD) {
 }?>
     
     
-    <body>
+    <body class>
     <div class="container">
         <?php require_once "header.php";
         ?>

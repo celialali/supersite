@@ -6,7 +6,7 @@
     <body>
         <h2 class="text-center">Ajouter une histoire</h2>
         <div class="well">
-            <form class="form-signin form-horizontal" role="form" action="ajout_hist_redirection.php" method="POST">
+            <form class="form-signin form-horizontal" role="form" enctype="multipart/form-data" action="ajout_hist_redirection.php" method="POST">
                 <div class="form-group">
                     <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                         <p class="text-center">Choisissez un titre à votre histoire</p>

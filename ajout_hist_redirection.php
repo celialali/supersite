@@ -6,7 +6,7 @@
     if(isset($_POST['titre'])){
                     $titre = $_POST['titre'];
                     $description = $_POST['description'];
-                    $image = $_POST['image'];
+                    $image = $_FILES['image']['name'];
                     if($BDD){
                         $req = "INSERT INTO histoire (titre,description, image) VALUES (:ttre,:descr,:img)";
                         $prepare=$BDD ->prepare($req);
@@ -17,6 +17,7 @@
                         $id = $req_id_hist->fetch()['id_hist'];
                     }
                     $tmpFile = $_FILES['image']['tmp_name'];
+                    print_r($_FILES);
                     if (is_uploaded_file($tmpFile)) {
                         // upload image
                         $image = basename($_FILES['image']['name']);
@@ -25,5 +26,5 @@
                         move_uploaded_file($_FILES['image']['tmp_name'], $uploadedFile);
                     }
             }
-            header('Location: ajout_situations.php?&id_hist='.$id); 
+            //header('Location: ajout_situations.php?&id_hist='.$id); 
             ?>
