@@ -50,6 +50,9 @@
             </div>
         </div>
     </body>
+    <br>
+    <?php require "footer.php";?>
+
     <?php 
     // on remet la liste des choix à zéro
     $req_suppr_choix = $BDD->prepare("UPDATE lecture SET liste_choix='' WHERE id_hist=:idhist AND id_profil=:idprofil");

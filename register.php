@@ -1,7 +1,10 @@
 <!doctype html>
 <html>
     <?php require "connect.php";
-    require "head.php";?>
+    require "head.php";
+    ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);?>
     
     <body>
     <div class="container">
@@ -56,6 +59,12 @@
                 $login=$_POST['login'];
                 $motdepasse = $_POST['password'];
                 $admin=$_POST["admin"];
+                if ($admin==1){
+                    $admin=1;
+                }
+                if ($admin==0){
+                    $admin=0;
+                }
 
                 if($BDD){
                 $req = "INSERT INTO profil (login,mdp,admin) VALUES (:logi,:mdp,:admin)";

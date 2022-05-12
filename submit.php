@@ -38,10 +38,6 @@ if(isset($_POST['supprimer'])){
     $id_hist=$_POST["supprimer"];
                                 
     if($BDD){
-        // $req_hist = "SELECT * FROM histoire WHERE id_hist=:unIDhist";
-        // $rep_hist = $BDD->prepare($req_hist);
-        // $rep_hist->execute(array("unIDhist"=>$id_hist));
-        // $histoire = $rep_hist->fetch();
 
         $req2 = "DELETE FROM histoire WHERE id_hist=:id";
         $supp_hist = $BDD->prepare($req2);
@@ -62,9 +58,6 @@ if(isset($_POST['supprimer'])){
     header("Location: gerer_hist.php");
 }
 
-if(isset($_POST['editer'])){
-    echo 'aa';
-}
 
 
 ?>

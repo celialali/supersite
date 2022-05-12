@@ -3,6 +3,10 @@
 <?php 
 require "connect.php";
 require "head.php";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if($BDD) {
     // On sélectionne les histoires qui ne sont pas masquées
     $req = "SELECT * FROM histoire WHERE affichee=1 ORDER BY titre";  

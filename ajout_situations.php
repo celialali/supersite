@@ -10,7 +10,7 @@
             <p>Entrez les <b>situations</b> présentes dans votre histoire une par une :</p>
             <fieldset>
                 <form class="form-signin form-horizontal" role="form" method="post"> 
-                    <!-- pas d'action car on reste sur la meme page (en gardant ?id_hist=... dans l'url-->
+                    <!-- pas d'action car on reste sur la meme page (en gardant ?id_hist=... dans l'url)-->
                 <div class="form-group">
                   
                     <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
