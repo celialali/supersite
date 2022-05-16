@@ -15,14 +15,14 @@
         if (isset($_SESSION['login']) and $_SESSION['admin']==1) { ?> 
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-wrench"></span> Gérer le site <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="ajout_hist.php">Ajouter une histoire</a></li>
-                            <li><a href="gerer_hist.php">Gérer les histoires</a></li>
-                        </ul>
-                    </li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-wrench"></span> Gérer le site <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="ajout_hist.php">Ajouter une histoire</a></li>
+                        <li><a href="gerer_hist.php">Gérer les histoires</a></li>
+                    </ul>
+                </li>
 
             </ul>
             <?php } ?>
